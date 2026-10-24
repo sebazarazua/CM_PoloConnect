@@ -1,0 +1,56 @@
+{
+  "review_id": "qr_1",
+  "content_id": "content_1",
+  "review_stage": "pre_publish",
+  "review_mode": "full",
+  "decision": "pass_for_publish",
+  "scope": {
+    "surfaces_reviewed": [
+      "feed image",
+      "caption"
+    ],
+    "available_inputs": [
+      "rendered asset",
+      "copy",
+      "facts",
+      "rights"
+    ],
+    "missing_inputs": [],
+    "publishing_route": "metricool"
+  },
+  "versions": {
+    "asset_version": "v3",
+    "copy_version": "v2",
+    "metadata_version": "v1"
+  },
+  "source_of_truth": [
+    {
+      "fact_id": "f1",
+      "fact": "Team Azul won 12-10.",
+      "status": "confirmed_primary",
+      "source_id": "evt_1"
+    }
+  ],
+  "issues": [],
+  "checks": {
+    "facts": "pass",
+    "editorial_alignment": "pass",
+    "copy": "pass",
+    "visual_or_video": "pass",
+    "authenticity": "pass",
+    "originality": "pass",
+    "rights": "pass",
+    "sponsor_compliance": "pass",
+    "accessibility": "pass",
+    "platform_preflight": "pass",
+    "timing": "pass",
+    "brand_integrity": "pass"
+  },
+  "approval": {
+    "state": "approved",
+    "approver": "human",
+    "approved_at": "2026-10-24T22:00:00-03:00"
+  },
+  "observed_at": "2026-10-24T22:05:00-03:00",
+  "simulated": true
+}

@@ -1,0 +1,56 @@
+{
+  "opportunity_id": "opp_1",
+  "source_candidates": [
+    {
+      "source_type": "news_event",
+      "source_id": "evt_1"
+    }
+  ],
+  "eligibility": {
+    "eligible": true,
+    "blockers": []
+  },
+  "strategy": {
+    "primary_objective": "reach",
+    "audience_job": "deliver a decisive match moment",
+    "editorial_angle": "Lead with the decisive goal using owned footage.",
+    "why_now": "The match just ended.",
+    "why_polo_connect": "Polo Connect owns the broadcast footage."
+  },
+  "timing": {
+    "timing_class": "reactive",
+    "earliest_publish_at": null,
+    "latest_publish_at": null,
+    "expires_at": null
+  },
+  "format": {
+    "preferred": "reel",
+    "fallback": "story",
+    "reason": "The footage carries the story."
+  },
+  "assets": {
+    "readiness": "ready",
+    "production_complexity": "low",
+    "required_assets": [
+      "owned broadcast clip"
+    ]
+  },
+  "decision": {
+    "state": "produce_now",
+    "priority": "P1",
+    "opportunity_score": 88,
+    "merge_with": null,
+    "reason": "High-value owned moment."
+  },
+  "handoff": {
+    "downstream_skill": "reel-planner",
+    "required_facts": [
+      "final score"
+    ],
+    "constraints": [],
+    "success_signal": "3-second hold and shares",
+    "learning_hypothesis": "Immediate peak action will outperform title intros."
+  },
+  "observed_at": "2026-10-24T20:00:00-03:00",
+  "simulated": true
+}

@@ -1,0 +1,92 @@
+{
+  "reel_id": "reel_1",
+  "opportunity_id": "opp_1",
+  "state": "ready_for_edit",
+  "strategy": {
+    "reel_job": "Make the decisive goal feel immediate.",
+    "primary_objective": "reach",
+    "audience_job": "experience the match-winning moment",
+    "success_signal": "3-second retention and shares",
+    "target_duration_seconds": {
+      "min": 10,
+      "max": 18
+    }
+  },
+  "rights": {
+    "video_status": "owned",
+    "audio_status": "owned"
+  },
+  "footage": [
+    {
+      "source_id": "clip_goal",
+      "source_path": "match.mp4",
+      "in_timecode": "00:12:10.000",
+      "out_timecode": "00:12:18.000",
+      "description": "Decisive goal from owned broadcast.",
+      "role": "primary_moment",
+      "selection_status": "must_use",
+      "rights_status": "owned",
+      "audio_value": "commentary and crowd"
+    }
+  ],
+  "hook": {
+    "type": "peak_action",
+    "description": "Open directly on the attack.",
+    "source_id": "clip_goal",
+    "alternative_hypotheses": []
+  },
+  "narrative": {
+    "architecture": "peak -> result -> replay -> reaction",
+    "beats": [
+      {
+        "start_s": 0,
+        "end_s": 5,
+        "function": "hook/payoff",
+        "visual": "decisive attack",
+        "source_id": "clip_goal",
+        "overlay": null,
+        "audio": "preserve commentary",
+        "required": true
+      }
+    ]
+  },
+  "text": {
+    "overlays": [
+      "FINAL: 12-11"
+    ],
+    "subtitles_required": false,
+    "subtitle_source": null,
+    "accessibility_notes": null
+  },
+  "audio": {
+    "mode": "commentary_led",
+    "preserve_source_audio": true,
+    "music_brief": null,
+    "voiceover_brief": null,
+    "rights_notes": "owned broadcast audio"
+  },
+  "cover": {
+    "strategy": "hero action frame with result",
+    "source_frame": "clip_goal@00:12:15",
+    "headline": "EL GOL DEL TÍTULO",
+    "crop_notes": "keep rider and ball central",
+    "brand_notes": "subtle Polo Connect mark"
+  },
+  "handoff": {
+    "downstream_skill": "reel-editor",
+    "deadline": null,
+    "must_preserve": [
+      "final score",
+      "decisive goal sequence"
+    ],
+    "editor_freedom": [
+      "micro cut timing",
+      "audio mix"
+    ],
+    "export_checks": [
+      "verify current Instagram Reel technical requirements"
+    ]
+  },
+  "observed_at": "2026-10-24T21:00:00-03:00",
+  "simulated": true
+}

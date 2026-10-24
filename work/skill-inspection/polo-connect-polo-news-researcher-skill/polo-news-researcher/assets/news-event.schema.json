@@ -1,0 +1,297 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Polo Connect News Event",
+  "type": "object",
+  "required": [
+    "event_id",
+    "event_type",
+    "headline_working",
+    "entities",
+    "time",
+    "claims",
+    "sources",
+    "editorial",
+    "rights",
+    "observed_at"
+  ],
+  "properties": {
+    "event_id": {
+      "type": "string"
+    },
+    "event_type": {
+      "type": "string"
+    },
+    "headline_working": {
+      "type": "string"
+    },
+    "entities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "type",
+          "canonical_name"
+        ],
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "canonical_name": {
+            "type": "string"
+          },
+          "aliases": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "source_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "time": {
+      "type": "object",
+      "properties": {
+        "event_started_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "event_ended_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "scheduled_for": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "announced_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "published_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "updated_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "claim",
+          "status",
+          "confidence",
+          "source_ids"
+        ],
+        "properties": {
+          "claim": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "confirmed_primary",
+              "confirmed_multi_source",
+              "reported_single_source",
+              "participant_claim",
+              "rumor",
+              "disputed",
+              "false_or_corrected",
+              "unknown"
+            ]
+          },
+          "confidence": {
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          },
+          "source_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "notes": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "source_id",
+          "url",
+          "role",
+          "observed_at"
+        ],
+        "properties": {
+          "source_id": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "publisher": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "published_at": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "updated_at": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "observed_at": {
+            "type": "string"
+          },
+          "original_reporting": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "derived_from": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "editorial": {
+      "type": "object",
+      "required": [
+        "action_state",
+        "urgency",
+        "editorial_score",
+        "why_it_matters"
+      ],
+      "properties": {
+        "action_state": {
+          "enum": [
+            "publish_now",
+            "prepare",
+            "monitor",
+            "background_only",
+            "reject"
+          ]
+        },
+        "urgency": {
+          "enum": [
+            "immediate",
+            "same_day",
+            "next_24h",
+            "scheduled",
+            "evergreen",
+            "no_action"
+          ]
+        },
+        "editorial_score": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 100
+        },
+        "why_it_matters": {
+          "type": "string"
+        },
+        "angles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "follow_up_trigger": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "rights": {
+      "type": "object",
+      "required": [
+        "media_status"
+      ],
+      "properties": {
+        "media_status": {
+          "enum": [
+            "owned",
+            "licensed",
+            "permission_confirmed",
+            "platform_embed_only",
+            "editorial_reference_only",
+            "rights_unknown",
+            "restricted"
+          ]
+        },
+        "credit_required": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "credit_text": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "observed_at": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

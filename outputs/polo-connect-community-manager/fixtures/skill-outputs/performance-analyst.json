@@ -1,0 +1,105 @@
+{
+  "analysis_id": "pa_1",
+  "scope": {
+    "analysis_type": "post",
+    "content_ids": [
+      "post_1"
+    ],
+    "window": "72h",
+    "objective": "reach"
+  },
+  "questions": [
+    "Did this Reel outperform comparable match Reels?"
+  ],
+  "data_quality": {
+    "status": "high",
+    "limitations": [],
+    "sources": [
+      "Instagram Insights",
+      "Metricool"
+    ]
+  },
+  "metrics": [
+    {
+      "metric_id": "m1",
+      "name": "organic_reach",
+      "value": 18000,
+      "source": "Instagram Insights",
+      "observed_at": "2026-10-27T20:00:00-03:00",
+      "window": "72h",
+      "denominator": null,
+      "organic_paid_scope": "organic",
+      "definition_version": "2026-10",
+      "availability_status": "available"
+    }
+  ],
+  "baselines": [
+    {
+      "baseline_id": "b1",
+      "description": "Comparable match Reels, 72h organic reach",
+      "sample_size": 12,
+      "comparison_quality": "high",
+      "median_values": {
+        "organic_reach": 10000
+      },
+      "exclusions": [
+        "boosted posts",
+        "finals"
+      ]
+    }
+  ],
+  "results": [
+    {
+      "statement": "Organic reach was 1.8x the comparable median.",
+      "evidence_ids": [
+        "m1",
+        "b1"
+      ],
+      "effect": "1.8x"
+    }
+  ],
+  "diagnoses": [
+    {
+      "hypothesis": "Peak-action opening may have contributed.",
+      "confidence": "medium",
+      "confounders": [
+        "player popularity"
+      ],
+      "evidence_ids": [
+        "m1",
+        "b1"
+      ],
+      "causal_claim": false
+    }
+  ],
+  "learnings": [
+    {
+      "learning_id": "l1",
+      "statement": "Peak-action-first is worth testing again for decisive match Reels.",
+      "maturity": "internal_observation",
+      "confidence": "medium",
+      "scope": "decisive match Reels",
+      "sample_size": 1,
+      "next_test": "Replicate on 3 comparable match moments."
+    }
+  ],
+  "actions": [
+    {
+      "action": "test_again",
+      "reason": "Positive result but causal evidence is incomplete.",
+      "owner": "reel-planner"
+    }
+  ],
+  "handoffs": [
+    {
+      "target_skill": "reel-planner",
+      "finding": "Peak-action-first showed a positive relative signal.",
+      "confidence": "medium",
+      "scope": "decisive match Reels",
+      "do_not_generalize": "Do not apply to all Reel types.",
+      "next_validation": "Replicate across comparable match moments."
+    }
+  ],
+  "observed_at": "2026-10-27T20:05:00-03:00",
+  "simulated": true
+}

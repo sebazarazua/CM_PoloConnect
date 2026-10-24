@@ -1,0 +1,7 @@
+{
+  "name":"Polo Connect", "status":"brand_system_required", "version":0,
+  "logos":[], "color_tokens":null, "typography_tokens":null, "spacing":null,
+  "visual_rules":[], "sponsors":[], "naming":{}, "tone_notes":[],
+  "missing":["logos oficiales","colores aprobados","tipografías y licencias","espaciado","reglas visuales","obligaciones de sponsors"],
+  "demo_policy":"Los planes y renders mock son metadatos ficticios; no constituyen un brand system aprobado."
+}

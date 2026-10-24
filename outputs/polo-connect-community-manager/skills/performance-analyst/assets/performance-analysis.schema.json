@@ -1,0 +1,393 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Polo Connect Performance Analysis",
+  "type": "object",
+  "required": [
+    "analysis_id",
+    "scope",
+    "questions",
+    "data_quality",
+    "metrics",
+    "baselines",
+    "results",
+    "diagnoses",
+    "learnings",
+    "actions",
+    "handoffs",
+    "observed_at"
+  ],
+  "properties": {
+    "analysis_id": {
+      "type": "string"
+    },
+    "scope": {
+      "type": "object",
+      "required": [
+        "analysis_type",
+        "content_ids",
+        "window"
+      ],
+      "properties": {
+        "analysis_type": {
+          "enum": [
+            "post",
+            "series",
+            "experiment",
+            "tournament",
+            "campaign",
+            "monthly",
+            "strategy"
+          ]
+        },
+        "content_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "window": {
+          "type": "string"
+        },
+        "objective": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "questions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "data_quality": {
+      "type": "object",
+      "required": [
+        "status",
+        "limitations"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "high",
+            "medium",
+            "low",
+            "insufficient"
+          ]
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "metrics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "metric_id",
+          "name",
+          "value",
+          "source",
+          "observed_at",
+          "availability_status"
+        ],
+        "properties": {
+          "metric_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "value": {},
+          "source": {
+            "type": "string"
+          },
+          "observed_at": {
+            "type": "string"
+          },
+          "window": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "denominator": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "organic_paid_scope": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "definition_version": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "availability_status": {
+            "enum": [
+              "available",
+              "not_available",
+              "not_authorized",
+              "not_applicable",
+              "not_captured",
+              "definition_changed"
+            ]
+          }
+        }
+      }
+    },
+    "baselines": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "baseline_id",
+          "description",
+          "sample_size",
+          "comparison_quality"
+        ],
+        "properties": {
+          "baseline_id": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "sample_size": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "comparison_quality": {
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          },
+          "median_values": {
+            "type": "object"
+          },
+          "exclusions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "statement",
+          "evidence_ids"
+        ],
+        "properties": {
+          "statement": {
+            "type": "string"
+          },
+          "evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "effect": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "diagnoses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "hypothesis",
+          "confidence",
+          "confounders"
+        ],
+        "properties": {
+          "hypothesis": {
+            "type": "string"
+          },
+          "confidence": {
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          },
+          "confounders": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "causal_claim": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "learnings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "learning_id",
+          "statement",
+          "maturity",
+          "confidence",
+          "scope"
+        ],
+        "properties": {
+          "learning_id": {
+            "type": "string"
+          },
+          "statement": {
+            "type": "string"
+          },
+          "maturity": {
+            "enum": [
+              "external_hypothesis",
+              "internal_observation",
+              "repeated_internal_signal",
+              "validated_internal_pattern",
+              "strategic_rule_candidate"
+            ]
+          },
+          "confidence": {
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          },
+          "scope": {
+            "type": "string"
+          },
+          "sample_size": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "next_test": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "action",
+          "reason",
+          "owner"
+        ],
+        "properties": {
+          "action": {
+            "enum": [
+              "continue",
+              "increase",
+              "decrease",
+              "iterate",
+              "pause",
+              "retire",
+              "test_again",
+              "needs_more_data"
+            ]
+          },
+          "reason": {
+            "type": "string"
+          },
+          "owner": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "handoffs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "target_skill",
+          "finding",
+          "confidence",
+          "scope"
+        ],
+        "properties": {
+          "target_skill": {
+            "type": "string"
+          },
+          "finding": {
+            "type": "string"
+          },
+          "confidence": {
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          },
+          "scope": {
+            "type": "string"
+          },
+          "do_not_generalize": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "next_validation": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "observed_at": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

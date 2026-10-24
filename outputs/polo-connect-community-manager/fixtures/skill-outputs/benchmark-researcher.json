@@ -1,0 +1,39 @@
+{
+  "account": {
+    "submitted_handle": "@demo_sports_ficticio",
+    "canonical_handle": null,
+    "verification_status": "unverified"
+  },
+  "content": {
+    "url": "https://demo.example.invalid/reference-1",
+    "platform": "instagram",
+    "format": "single_image"
+  },
+  "evidence": {
+    "metrics": [],
+    "observations": [
+      {
+        "observation": "Ejemplo completamente ficticio para probar el contrato; no es una investigación real."
+      }
+    ]
+  },
+  "analysis": {
+    "confidence": "low",
+    "utility_score": 75,
+    "pattern_status": "single_example",
+    "performance_signal": "insufficient_data",
+    "mechanisms": [
+      "Prioridad visual del resultado antes que el contexto secundario"
+    ]
+  },
+  "transfer": {
+    "originality_check": {
+      "passes": true,
+      "notes": "original"
+    },
+    "principle": "Jerarquía de una sola lectura",
+    "polo_connect_application": "Probar resultado primero con material propio, conservando identidad aprobada"
+  },
+  "observed_at": "2026-10-24T19:00:00-03:00",
+  "simulated": true
+}

@@ -1,0 +1,212 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Polo Connect Social Copy",
+  "type": "object",
+  "required": [
+    "copy_id",
+    "opportunity_id",
+    "state",
+    "language",
+    "tone_mode",
+    "copy_job",
+    "source_facts",
+    "outputs",
+    "qa",
+    "observed_at"
+  ],
+  "properties": {
+    "copy_id": {
+      "type": "string"
+    },
+    "opportunity_id": {
+      "type": "string"
+    },
+    "state": {
+      "enum": [
+        "ready_for_approval",
+        "ready_for_publish",
+        "blocked_verification",
+        "blocked_required_input",
+        "replan_required"
+      ]
+    },
+    "language": {
+      "type": "string"
+    },
+    "tone_mode": {
+      "type": "string"
+    },
+    "copy_job": {
+      "type": "string"
+    },
+    "source_facts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "fact_id",
+          "fact",
+          "verification_status"
+        ],
+        "properties": {
+          "fact_id": {
+            "type": "string"
+          },
+          "fact": {
+            "type": "string"
+          },
+          "verification_status": {
+            "type": "string"
+          },
+          "source_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "outputs": {
+      "type": "object",
+      "properties": {
+        "caption": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "headline": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "subheadline": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "overlays": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "slide_copy": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "index",
+              "text"
+            ],
+            "properties": {
+              "index": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "text": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "story_frames": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "index",
+              "text"
+            ],
+            "properties": {
+              "index": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "text": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "interaction_prompt": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          }
+        },
+        "cta": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "hashtags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mentions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "alt_text_draft": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "qa": {
+      "type": "object",
+      "required": [
+        "facts_checked",
+        "anti_ai_checked",
+        "originality_checked",
+        "tone_checked",
+        "asset_consistency_checked"
+      ],
+      "properties": {
+        "facts_checked": {
+          "type": "boolean"
+        },
+        "anti_ai_checked": {
+          "type": "boolean"
+        },
+        "originality_checked": {
+          "type": "boolean"
+        },
+        "tone_checked": {
+          "type": "boolean"
+        },
+        "asset_consistency_checked": {
+          "type": "boolean"
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "observed_at": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,195 @@
+[
+  {
+    "name": "benchmark-researcher",
+    "files": {
+      "CODEX_IMPLEMENTATION_BRIEF.md": "458cdc5b10d489a126196c7f8bb8f2105cf51f244b10e3a46ec081a449313cdf",
+      "SKILL.md": "a51177c361ace67e8e2600efbd7c9d22dfbc26114e0e352e2db83c1a04ed0f57",
+      "assets/benchmark-record.schema.json": "9d2673e2b8a57c4b8b1fe2ea9670335a208fc64e581932ac5558c5439b761a88",
+      "assets/benchmark-report-template.md": "b764c29835159bfedfbaab7aa275341561be0845ef697f043027f039d5bc7f71",
+      "references/analysis-framework.md": "b07627cb2f70c4dbbbe05cd1b11d267ebf121b8611bcf255e08a5abfdb49b20b",
+      "references/benchmark-pool.md": "5a14172536ff96923a64b28f20832d0917290ae20554907514b4f4a92c513ebc",
+      "references/evidence-and-metrics.md": "421b3d624c1ca8028209d31e2ce01cb04d35cec83ade84bbea6faf846d6ec95c",
+      "references/platform-state-2026.md": "b340e8b9634963ff9a479f2e03464b921ce6847dc93f1ba92db16fbf45eb7f60",
+      "references/transfer-and-originality.md": "ea24e0e4302964bdd0be52738f8532ddafe4336c2bd978c9820953b6e32ccf5b",
+      "scripts/validate_benchmark_record.py": "4a166ea951683971b4799744e6756ea320c0a7048b6528b56337dd39b65a0b9b",
+      "tests/test_validate_benchmark_record.py": "efb6896e522c07e136aa418741988f5e4973bc8ec61361b89ff8a587f8bd8ca0"
+    },
+    "normalized": {
+      "SKILL.md": "7e7b09d164758a2225b7e8c90ba9d47b1a7d79409edec854e1341e1202a72964"
+    }
+  },
+  {
+    "name": "content-opportunity-detector",
+    "files": {
+      "CODEX_IMPLEMENTATION_BRIEF.md": "f1fd8e79d60d4673a6b5ffd0d01b69ccc3f03aa2960a7bd980dbbdcf2b9a9a68",
+      "SKILL.md": "4552a46b238067a37536dac16ac945585ad50d76f5e3748fab905c116f9a6d5d",
+      "assets/content-opportunity-report-template.md": "f25278dabe1aba895bae279f03c9da98d5d8c47c919c58c801f7ee5a503dc645",
+      "assets/content-opportunity.schema.json": "0728b344f4e5c0ad3513086f99740e0b6aec13d1e9644af6d9ae732566c06ebc",
+      "references/asset-readiness.md": "06d2e5365fcbd4206a9f1e7e79e38142230ff706960d020ca752e50833034c76",
+      "references/decision-framework.md": "7762160353c01a33a72c7862bc7eaddccb8fb7211228059fd702919dc531e999",
+      "references/editorial-fatigue-and-diversity.md": "e90a355e9bc6b54c82ccd8a0e8d036f7a2eaf3340dc1a098b13a14266d387747",
+      "references/handoff-contract.md": "12651a40fb3cebb8f62780235e25914710f9db1d024a4b61bf8ad37371e28f69",
+      "references/opportunity-types.md": "98825f8d909d5fe7bfdf01884ff3f83f277453dca73d8f59b246ef7701a2ece4",
+      "references/timing-and-lifecycle.md": "9c10fab55368245ebc1256b92a8d17ef5b51a9ef54669ca597612e48054b7393",
+      "scripts/validate_content_opportunity.py": "abd5d347503543dd62ae016be9c1294176449764aeb39b59d867eed383dd5ae5",
+      "tests/test_validate_content_opportunity.py": "e058241664d035e78bb35c137a3a80c374f9da78c4e272f6d98acabd1999f3f5"
+    },
+    "normalized": {
+      "SKILL.md": "6d9225a682a8debc36e6cadda2c401d645f098930cf64c56c8b7f8ba5d0bf65c"
+    }
+  },
+  {
+    "name": "copywriter",
+    "files": {
+      "CODEX_IMPLEMENTATION_BRIEF.md": "8a02936a3461d5ef545f090b9a91c02d57b12507577a460750091be2d22f120e",
+      "SKILL.md": "a6bc2941290933873d532302a6bc1ed6aadcf33e8462e49af01061f3e9b17778",
+      "assets/social-copy-template.md": "8e8153fa31aa0b4a0fa4dab6f1302c0dc0d5ff8c69dbefb0dcae32f84bdcc224",
+      "assets/social-copy.schema.json": "ed26f79a74325c8b754fe91bb86411043f0527ad6396f09c8c9a8cec5963c84f",
+      "references/anti-ai-language.md": "2fc4fa5c3568324c095d953b8355d6bdbb840146915480e8726a8baabf877157",
+      "references/caption-architecture.md": "b12ee4dfced27896854202908949a70027b1eb2cc1909e8003d0703a64677304",
+      "references/copy-qa.md": "35c0985900b37726688c7afb8e08b6c36227746d4664058760bcdcbcaabf2f4d",
+      "references/cta-hashtags-and-mentions.md": "1f8d7d4d6e849ad4570a88d88cce3ee55ec94aae3802acd5e3b709ce5b99b563",
+      "references/headlines-and-overlays.md": "0f74d4d4f6674b12dd2e6151e7831eae4738a7fc0f93dab6b216fb62d1a64ac0",
+      "references/platform-adaptation.md": "19b73708f723e02691a36c8147bcb92172a635ea92af6f9ae2c907a3e0f18954",
+      "references/polo-language-and-factual-discipline.md": "819fdbe2f87d9364e43d24e7573a7757e3c677c017b292f5079022d0c84576a6",
+      "references/voice-and-tone.md": "273533f950a65e0f1ebc6876d394f1ab001c6e6c371eb11e527fb6a00c50d5a6",
+      "scripts/validate_social_copy.py": "d12f5fb49475cc02c2d7095fc0c33ac5c9f969945f2c7e816a5427b3cd17169c",
+      "tests/test_validate_social_copy.py": "382310d73e6109bfa750191e5ff2c140fd6afab43cf0e8f51432348a98463de7"
+    },
+    "normalized": {
+      "SKILL.md": "6baf1c8f719ec5dff64f230779990f31047c3d6811f125039ab90feebe1f5334"
+    }
+  },
+  {
+    "name": "editorial-strategist",
+    "files": {
+      "CODEX_IMPLEMENTATION_BRIEF.md": "1d796012615fe6b3b64ed68ad5e2dac1187adf12b83245a39a1772df65f515f9",
+      "SKILL.md": "0b417818866639e000a8d1ade26e99e5ba026dd9704d3e453ce1828b5bf3120e",
+      "assets/editorial-plan.schema.json": "2e6db000b7c708580089351a843923b7075a0bdcd8285f8e49335cbfd008fb75",
+      "assets/editorial-strategy-report-template.md": "821415c6c2c6e80eeceb1f251f0f4170ada5062e885240a220206ebcd688dc31",
+      "references/calendar-governance.md": "6bcc0d6d1ad2100f497d7f52324e80f5ad915c54f8bf2ad303959e35261ef7e5",
+      "references/campaign-and-tournament-planning.md": "85f8102255c356757a6fc9163ef0f254377fb69626bdd8bf3807b323036d86cb",
+      "references/content-pillars-and-series.md": "4552e8e9f1075495fd28e5e0f15bf8cc545d603b3c2dd3da3a699b22dac58a11",
+      "references/human-quality-and-brand-integrity.md": "5924a42664705b384363b2fc7ec9b4fc937ba636aefbb060310677a7c07da046",
+      "references/objectives-and-measurement.md": "4656bcaa90445b35b2b13444295c7df062bb2515210f496c5dd27955f3e8ce70",
+      "references/performance-feedback-loop.md": "e50f36820cb60f74664ec6c3204efc3b38a9d56bdd852d56492ad92cd7d0ea4a",
+      "references/platform-state-2026.md": "d287bef299b529e2685a3b7bbc25cf0fda9f0436171a1c6713527c4233c7b587",
+      "references/strategy-model.md": "ff6d0f3f96413587d4fb60542d2983d18bdfd34a674267951fd3fe7e94477426",
+      "scripts/validate_editorial_plan.py": "6de646c29777a89b265351502c7e1677f06d07f722662d78aafa54577f5b0357",
+      "tests/test_validate_editorial_plan.py": "68c4e9c3636dc5ef0baaaebd97ffac00bd6ba5a8f0ae63381956ac6dc237c062"
+    },
+    "normalized": {
+      "SKILL.md": "523c9e6654d46069beb7728eb739d64b8e0878f48a293b5c9e11dfc5aa20cbd8"
+    }
+  },
+  {
+    "name": "performance-analyst",
+    "files": {
+      "CODEX_IMPLEMENTATION_BRIEF.md": "5543a75be8e19b65c36b3f8a9375aff85ce4a3c2c7bbc608ab2052f29562d980",
+      "SKILL.md": "dacee220093a2aff952941e159fb930b7908be0f5f6706ab4b055f674834da85",
+      "assets/performance-analysis-template.md": "3636256b298cc6082a6512da04cff02ba3dd6fe0506a642330eb8965873ada62",
+      "assets/performance-analysis.schema.json": "2b9946ea936d98f6eb0caf4891b84bd6faa920cfa95611714a052a0fac491247",
+      "references/baselines-and-normalization.md": "4db5e338916f08035bba127a2b338b5230737767501db4325741b6c811fc97ed",
+      "references/diagnosis-and-causal-discipline.md": "500c8b8e0ee30fc78828a4309d5347a961097a83c4a022a24d6fb5b0e434c7b9",
+      "references/experiment-analysis.md": "963d563ab18b94c4bb954fc4478365d4e343d1965e447d127d2dac6395daad4b",
+      "references/learning-system.md": "d9da9f39caea8128ca600c243b98c3f6a740663ed4ca8c2baab200635601224f",
+      "references/measurement-framework.md": "533f24c5c525e6dd3a7f2126079367de1f77cb482e1cea59981eca504f374313",
+      "references/metric-dictionary-and-data-quality.md": "d5fe4ed332eacca3d1b2db8c73bf7c6f15ac8ad9a91718af6cbcb443acb8c253",
+      "references/platform-metrics-2026.md": "0039d4f40f05361cd97f8d180392eb05c10d62f14e53ac2245b2d7c8b9bdf864",
+      "references/strategic-handoffs.md": "c8cf47e6ea3dcabd393f45243ed6992b126f30668b8b863b21a568597533cfba",
+      "scripts/validate_performance_analysis.py": "4e7f472803af72da208206389d0a230bc8c80e6686560800a3774c41f8c3c3c5",
+      "tests/test_validate_performance_analysis.py": "024a29a16c53df088437869893c54d1d06da1c161b091657a4866f47ec0c6985"
+    },
+    "normalized": {
+      "SKILL.md": "59b7a9ebf9f07ad16591805e6895c324bd3ae54b292dd67f9c5cfe53eca9fe02"
+    }
+  },
+  {
+    "name": "polo-news-researcher",
+    "files": {
+      "CODEX_IMPLEMENTATION_BRIEF.md": "a74742191ddda73724159fba6044f454c2890e6de659ecce5daf56910d2f6634",
+      "SKILL.md": "fd26f2632339c97c60867304f0264bc3d8d4e6fc2c9d1a763bc9897ec0d6f3f7",
+      "assets/news-event.schema.json": "2a43d70322511832c2420b503a652f00f5dac66980b279774cc146e415986a3e",
+      "assets/news-research-report-template.md": "35f5ca2d750e44e53c9e0cb3f1dde4638e5f6ac77375b6ab36c3d96e7908636c",
+      "references/editorial-prioritization.md": "271854902123c056af1cc9673bbf51b67496b67b44124d39646bff94e81603ba",
+      "references/entity-and-time-resolution.md": "af9ecd309e7de0e15dd6411efa5e2313cfaf03af4b8721f4149be0b5d8a4167e",
+      "references/rights-and-attribution.md": "5729db6bdee19d0cc4db86e22e0cc22ad94d6d9075b7a74e8e15236ce012b770",
+      "references/source-registry-2026.md": "0faa3b041e2e3e2a3bd1943f402a4d0a4a1859868f29338d95323efc06029fe2",
+      "references/source-strategy.md": "3b8c2ec2100c24f6e6e4f9639fbc5a7cd0d226c88dc7bef2057c30faa5d49510",
+      "references/verification-protocol.md": "471f41740766b70cd862ec45dd749397bc2514fd352c79a7ca1a4c8496986ef7",
+      "scripts/validate_news_event.py": "20fae1311f45f5dcd98a3a0cbc7d1abaa81b090d6ad7f8c5f0debe6ce2d09c9a",
+      "tests/test_validate_news_event.py": "828d79979b3c3a5a0d250e10e8784bdaec6c62b5461635ccb09e08691774aa0a"
+    },
+    "normalized": {
+      "SKILL.md": "a80088133dfade7480ae2e60e4b9302bb0117826b9fa4a3a95a0ea4b8bd6ad3a"
+    }
+  },
+  {
+    "name": "quality-reviewer",
+    "files": {
+      "CODEX_IMPLEMENTATION_BRIEF.md": "db88e7e21ba97ba2df12d1c1fa3314fa37eba75caea3778bc062e186514c6807",
+      "SKILL.md": "f9719f29e23592a85151379e5aadbf2fc8ea12ef4608481a8c077d3369eda001",
+      "assets/quality-review-template.md": "37693928fb3ab0c968d9c120383b62b918353368b816d543e9b72bea804cd55b",
+      "assets/quality-review.schema.json": "8dcc0c6a6a448a4ef4bedb5ac6f2dc99d94b224420c6987e9a71f66bb6ab9dbf",
+      "references/accessibility-and-platform-preflight.md": "23aa98d486c0d28a36cb42c96229d3ddf19ec8055277cd35112cbb9656198fb1",
+      "references/approval-and-correction-loop.md": "cf7e32dc328fecc743c4d82600081b2d2d59b0bebb2212b0b1633fa370fefe7c",
+      "references/copy-and-editorial-qa.md": "e559c7bb2678f3989038fc128d1a2e76632a5d00003a25a97aec9d67297716f0",
+      "references/factual-consistency.md": "577fbaedb9f6c9e65d8806c73a4ca8c38e71189b1e00a06e93ebd7ec47201a7f",
+      "references/platform-preflight-2026.md": "59834fda3bddebc763ad55484f9d8dcc48295ca6db00627308811e86d62c76e3",
+      "references/review-protocol.md": "e7fae2923431f7ae7136004cbebf8e15a127ccc5b02f1a7f74ae90a3dff1e6cb",
+      "references/rights-sponsor-and-compliance.md": "eea364ebdcc1cdadc199fa338ea9690e4bd6f6e9f04b05f35afa5f9914d8c9e1",
+      "references/severity-and-routing.md": "c550c3203984d98bf72955495a210b537b6dd51b84b98fc96c5d94bd279a939a",
+      "references/visual-and-authenticity-qa.md": "dde9e03eabfc65d02f68e95a5e32988049d0b0475cf987f3359cf5ef50742f96",
+      "scripts/validate_quality_review.py": "d84c4ae5fda517a5237dcf01c9ab55e67426272b756a7f34a5a0f7359aba3f05",
+      "tests/test_validate_quality_review.py": "2ca7f28af2a3865b65385f62a1f436041c4903cd76fb742075fc5af410823824"
+    },
+    "normalized": {
+      "SKILL.md": "182473204b582d48604e63a70e138f162300d3285db09e2696745ea2b919bb76"
+    }
+  },
+  {
+    "name": "reel-planner",
+    "files": {
+      "CODEX_IMPLEMENTATION_BRIEF.md": "c244ecb4fe9003f0931d116e11afe6c5653754ec17bd1a507b86d13fbc876509",
+      "SKILL.md": "ec036d0ca93c1218f65d59a8ea397abfa862a3e298cbc4b5baa6f853c2dddc68",
+      "assets/reel-plan.schema.json": "5885c71998411c4eedb8e188c0ba66afd682c2f94e77ba5c8d3f9f5e01f712bd",
+      "assets/reel-production-plan-template.md": "e85aea2c7769eb6d8bdfb4bd6da088619aad4cf6d8920f6a4f9f293dc6727deb",
+      "references/audio-and-rights.md": "ef6df500e3b738a46771680ab29623925b2361f243563b591188ad8a55ce89f2",
+      "references/cover-and-packaging.md": "df96dbe79e4782e55bd03e1d4c32716b1b44d7eaca1a860d9429028dce2a45ef",
+      "references/editor-handoff.md": "ee2e3fd6cdad6e08c3aa2963a021e5a1b26b2565e03ffd7e1b19a52cd9385eef",
+      "references/footage-selection.md": "46b459be88e12e285b2406dd2b020d4b0bed8507b99642c82239ee3185c1e5c3",
+      "references/hooks-and-retention.md": "272d4bc96beba9e2d711422de5e916cd6904b3aa173be9bc52c357ff284179d9",
+      "references/platform-output-2026.md": "dcff135a9212ab65d54eece1257777f2c0d500730f85fb2c717722f569102ccc",
+      "references/reel-story-architecture.md": "96fdbdb324bdb26d35b6a3fded1485d6dce8726193fae241b4a1c759779716ca",
+      "references/text-subtitles-and-accessibility.md": "0138a10daa69b37b02c3d6eae7e9df7295f76beea130c7abc668e13cee2579e7",
+      "scripts/validate_reel_plan.py": "50f8085375a9e083a48eb04d6357c7aaeeee7abea52cb66f66cca39bb379a3b8",
+      "tests/test_validate_reel_plan.py": "a91c8df9b3de0ddaa1e216fb20ff96c7c7fea9d458ef06bdceffd97fb764f1c2"
+    },
+    "normalized": {
+      "SKILL.md": "506b40402602c31e95792a61e67e6b982f566a2618b5a797355b2b34b348d413"
+    }
+  },
+  {
+    "name": "social-designer",
+    "files": {
+      "CODEX_IMPLEMENTATION_BRIEF.md": "776b107ff4134959d732be2c37db7183c009592589e4e82c128136e2fb057270",
+      "SKILL.md": "14a78a5d7f25e2806b0cd5c1a8c46579b3c76644ac89729e0fffe24f424939ce",
+      "assets/social-design-plan-template.md": "150a47295aaa8ca926cbc67dd276df0afd2f91c40d8ea54834d3bb5c1fd4b651",
+      "assets/social-design-plan.schema.json": "5030bdbb4d3c44ccc12d38a0c5762bf551a0307b1295b4b941cec6e428d3f69a",
+      "references/accessibility-and-readability.md": "bb6fea1cb68772f179057c9e7e09361fcccebe158d87bf293b88f615e5701460",
+      "references/carousel-architecture.md": "94201e10297af208e1a47ad0d18b0d8a477c9e279ce5f42173cb52e68c9718b3",
+      "references/design-system-and-identity.md": "9b2b77010941e76daa169e699d663feb49b2792b1ad4d8748f0e029bc64fca8d",
+      "references/layout-and-hierarchy.md": "5eb1953c5a722307174f797666e9dea2de2fea9d186675b99c0375d649508fa3",
+      "references/photo-treatment-and-authenticity.md": "d96de61e018ce46ccb3cdbeb5c7dce460bf804aa38cc18fabfec0a01834402ce",
+      "references/platform-output-2026.md": "9c0a0f693b54abcdc9959af26ba6d8703ded7f97ea7cf4b8716ca602cf9df907",
+      "references/render-handoff.md": "1de4a174014b11bae77d526b235b9f7204e5086d7ae3d4c40df5a187122ef1e8",
+      "references/sports-data-visualization.md": "5afac51669661ebc309e69699b7f91fc3f77abf656c41468441e83e9de592e9b",
+      "references/templates-and-variation.md": "6907663b32e199121d92bcabe68217e8518bfd0a5b658bebfb1ad8476c534429",
+      "scripts/validate_social_design.py": "9870cb23637e779311b73a06ed993a84c28bed7acd61aa327662a626770b1e40",
+      "tests/test_validate_social_design.py": "41c39cc71029a17da2423a9a6505510389f8d4bc6aac570bf17a36312b0a5b4a"
+    },
+    "normalized": {
+      "SKILL.md": "dd230d79b029e7e4f545d27be8a9c24a897f3744559cfda5bdfcf591c85ea56d"
+    }
+  }
+]

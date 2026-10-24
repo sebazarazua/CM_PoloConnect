@@ -1,0 +1,36 @@
+{
+  "event_id": "evt_1",
+  "event_type": "match_result",
+  "headline_working": "Example result",
+  "entities": [],
+  "time": {},
+  "claims": [
+    {
+      "claim": "Team Azul beat Team Blanco 10-9",
+      "status": "confirmed_primary",
+      "confidence": "high",
+      "source_ids": [
+        "s1"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "s1",
+      "url": "https://demo.example.invalid",
+      "role": "primary_official",
+      "observed_at": "2026-10-24T20:00:00-03:00"
+    }
+  ],
+  "editorial": {
+    "action_state": "publish_now",
+    "urgency": "same_day",
+    "editorial_score": 80,
+    "why_it_matters": "Relevant result"
+  },
+  "rights": {
+    "media_status": "owned"
+  },
+  "observed_at": "2026-10-24T20:00:00-03:00",
+  "simulated": true
+}

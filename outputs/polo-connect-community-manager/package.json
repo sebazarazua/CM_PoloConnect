@@ -1,0 +1,58 @@
+{
+  "name": "polo-connect-community-manager",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src tests scripts --max-warnings 0",
+    "test": "vitest run",
+    "test:postgres": "tsx scripts/test-postgres.ts",
+    "skills:types": "node scripts/generate-types.mjs",
+    "skills:check": "node scripts/python.mjs scripts/check_skills.py",
+    "skills:install": "node scripts/python.mjs scripts/install_skills.py",
+    "safety:check": "tsx scripts/safety-check.ts",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate deploy",
+    "cm:demo": "tsx src/cli.ts demo",
+    "cm:full-demo": "tsx src/cli.ts full-demo",
+    "cm:discover": "tsx src/cli.ts discover",
+    "cm:opportunity": "tsx src/cli.ts opportunity",
+    "cm:produce": "tsx src/cli.ts produce",
+    "cm:qa": "tsx src/cli.ts qa",
+    "cm:approve": "tsx src/cli.ts approve",
+    "cm:reject": "tsx src/cli.ts reject",
+    "cm:publish:mock": "tsx src/cli.ts publish",
+    "cm:analyze": "tsx src/cli.ts analyze",
+    "cm:strategy": "tsx src/cli.ts strategy",
+    "cm:inspect": "tsx src/cli.ts inspect",
+    "verify": "npm run skills:check && npm run lint && npm run typecheck && npm test && npm run build && npm run safety:check && npm run cm:full-demo -- --approve-demo --actor fixture-validation"
+  },
+  "dependencies": {
+    "@prisma/client": "6.19.3",
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "9.39.1",
+    "@types/node": "24.10.1",
+    "embedded-postgres": "18.4.0-beta.17",
+    "eslint": "9.39.1",
+    "json-schema-to-typescript": "15.0.4",
+    "prisma": "6.19.3",
+    "tsx": "4.20.6",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.46.4",
+    "vitest": "5.0.5"
+  },
+  "overrides": {
+    "@prisma/config": {
+      "deepmerge-ts": "8.0.2",
+      "effect": "3.21.5"
+    }
+  }
+}

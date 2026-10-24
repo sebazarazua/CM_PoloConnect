@@ -1,0 +1,348 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Polo Connect Editorial Plan",
+  "type": "object",
+  "required": [
+    "plan_id",
+    "planning_window",
+    "audiences",
+    "objectives",
+    "pillars",
+    "series",
+    "calendar_policy",
+    "capacity",
+    "experiments",
+    "opportunity_detector_brief",
+    "review",
+    "observed_at"
+  ],
+  "properties": {
+    "plan_id": {
+      "type": "string"
+    },
+    "planning_window": {
+      "type": "object",
+      "required": [
+        "horizon",
+        "starts_at",
+        "ends_at"
+      ],
+      "properties": {
+        "horizon": {
+          "enum": [
+            "seasonal",
+            "tournament",
+            "monthly",
+            "weekly"
+          ]
+        },
+        "starts_at": {
+          "type": "string"
+        },
+        "ends_at": {
+          "type": "string"
+        }
+      }
+    },
+    "audiences": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "priority",
+          "need"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "priority": {
+            "enum": [
+              "primary",
+              "secondary",
+              "opportunistic"
+            ]
+          },
+          "need": {
+            "type": "string"
+          },
+          "desired_behavior": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "objectives": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "objective",
+          "primary_kpi"
+        ],
+        "properties": {
+          "objective": {
+            "type": "string"
+          },
+          "primary_kpi": {
+            "type": "string"
+          },
+          "diagnostic_metrics": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "target": {},
+          "confidence": {
+            "enum": [
+              "high_confidence",
+              "medium_confidence",
+              "experimental"
+            ]
+          }
+        }
+      }
+    },
+    "pillars": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "audience_need",
+          "strategic_role",
+          "current_emphasis"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "audience_need": {
+            "type": "string"
+          },
+          "strategic_role": {
+            "type": "string"
+          },
+          "polo_connect_advantage": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "current_emphasis": {
+            "enum": [
+              "core",
+              "supporting",
+              "opportunistic",
+              "reduced"
+            ]
+          },
+          "anti_pattern": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "series": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "purpose",
+          "status"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "purpose": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "active",
+              "test",
+              "paused",
+              "retired"
+            ]
+          },
+          "trigger_or_cadence": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "success_signal": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "retirement_rule": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "calendar_policy": {
+      "type": "object",
+      "required": [
+        "reactive_capacity_protected",
+        "empty_days_allowed"
+      ],
+      "properties": {
+        "reactive_capacity_protected": {
+          "type": "boolean"
+        },
+        "empty_days_allowed": {
+          "type": "boolean"
+        },
+        "fixed_obligations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "saturation_warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "capacity": {
+      "type": "object",
+      "required": [
+        "total_units",
+        "planned_units",
+        "reactive_reserved_units"
+      ],
+      "properties": {
+        "total_units": {
+          "type": "number",
+          "minimum": 0
+        },
+        "planned_units": {
+          "type": "number",
+          "minimum": 0
+        },
+        "reactive_reserved_units": {
+          "type": "number",
+          "minimum": 0
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "experiments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "hypothesis",
+          "variable",
+          "success_signal"
+        ],
+        "properties": {
+          "hypothesis": {
+            "type": "string"
+          },
+          "variable": {
+            "type": "string"
+          },
+          "baseline": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "success_signal": {
+            "type": "string"
+          },
+          "evaluation_window": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "opportunity_detector_brief": {
+      "type": "object",
+      "required": [
+        "current_objectives",
+        "priority_audiences",
+        "active_narratives"
+      ],
+      "properties": {
+        "current_objectives": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "priority_audiences": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "active_narratives": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "reduce_or_avoid": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "reactive_notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "review": {
+      "type": "object",
+      "required": [
+        "next_review_at",
+        "review_scope"
+      ],
+      "properties": {
+        "next_review_at": {
+          "type": "string"
+        },
+        "review_scope": {
+          "type": "string"
+        }
+      }
+    },
+    "observed_at": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,93 @@
+{
+  "design_id": "design_1",
+  "opportunity_id": "opp_1",
+  "state": "ready_for_render",
+  "strategy": {
+    "design_job": "Communicate the final result instantly.",
+    "primary_objective": "authority",
+    "audience_job": "know who won and feel the match emotion",
+    "success_signal": "shares and saves",
+    "benchmark_mechanisms": []
+  },
+  "output": {
+    "surface": "instagram_feed",
+    "structure": "single_image",
+    "aspect_intent": "portrait-first 4:5-safe",
+    "slide_count": 1,
+    "render_path": "canva",
+    "template_relationship": "template_variant"
+  },
+  "assets": [
+    {
+      "asset_id": "photo_1",
+      "path_or_url": "winner.jpg",
+      "role": "hero authentic match photo",
+      "rights_status": "owned",
+      "required": true,
+      "crop_notes": "keep rider and horse central",
+      "credit": null
+    }
+  ],
+  "visual_system": {
+    "concept": "Hero match image with compressed score band.",
+    "primary_carrier": "authentic match photo",
+    "hierarchy": [
+      "winner/result",
+      "team names",
+      "tournament"
+    ],
+    "type_roles": [
+      "display score",
+      "team names",
+      "metadata"
+    ],
+    "color_roles": [
+      "brand base",
+      "high contrast text",
+      "single accent"
+    ],
+    "brand_presence": "subtle Polo Connect mark",
+    "photo_treatment": "natural contrast correction",
+    "sponsor_treatment": null
+  },
+  "slides": [
+    {
+      "index": 1,
+      "function": "result",
+      "primary_message": "Team Azul 12 — Team Blanco 10",
+      "display_text": [
+        "FINAL",
+        "TEAM AZUL 12",
+        "TEAM BLANCO 10"
+      ],
+      "asset_ids": [
+        "photo_1"
+      ],
+      "data": [],
+      "layout_logic": "photo-dominant with result band"
+    }
+  ],
+  "accessibility": {
+    "contrast_checked": true,
+    "reading_order": "result, teams, tournament, brand",
+    "alt_text": "Player on horseback celebrating after Team Azul wins 12-10.",
+    "notes": null
+  },
+  "handoff": {
+    "downstream_tool_or_skill": "canva",
+    "must_preserve": [
+      "final score",
+      "team names",
+      "authentic photo"
+    ],
+    "renderer_freedom": [
+      "spacing",
+      "crop micro-adjustment"
+    ],
+    "export_checks": [
+      "verify current Instagram feed/API requirements"
+    ]
+  },
+  "observed_at": "2026-10-24T21:30:00-03:00",
+  "simulated": true
+}

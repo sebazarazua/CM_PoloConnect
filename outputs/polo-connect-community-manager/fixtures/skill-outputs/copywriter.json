@@ -1,0 +1,42 @@
+{
+  "copy_id": "copy_1",
+  "opportunity_id": "opp_1",
+  "state": "ready_for_approval",
+  "language": "es-AR",
+  "tone_mode": "result",
+  "copy_job": "Add consequence and next-match context to the result graphic.",
+  "source_facts": [
+    {
+      "fact_id": "f1",
+      "fact": "La Natividad won 14-12.",
+      "verification_status": "confirmed_primary",
+      "source_id": "evt_1"
+    }
+  ],
+  "outputs": {
+    "caption": "La Natividad cerró la final 14-12 y se quedó con el título.",
+    "headline": "LA NATIVIDAD, CAMPEÓN",
+    "subheadline": null,
+    "overlays": [
+      "FINAL 14-12"
+    ],
+    "slide_copy": [],
+    "story_frames": [],
+    "cta": null,
+    "hashtags": [
+      "#Polo"
+    ],
+    "mentions": [],
+    "alt_text_draft": null
+  },
+  "qa": {
+    "facts_checked": true,
+    "anti_ai_checked": true,
+    "originality_checked": true,
+    "tone_checked": true,
+    "asset_consistency_checked": true,
+    "notes": null
+  },
+  "observed_at": "2026-10-24T22:00:00-03:00",
+  "simulated": true
+}

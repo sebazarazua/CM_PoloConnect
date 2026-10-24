@@ -1,0 +1,262 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Polo Connect Benchmark Record",
+  "type": "object",
+  "required": [
+    "account",
+    "content",
+    "evidence",
+    "analysis",
+    "transfer",
+    "observed_at"
+  ],
+  "properties": {
+    "account": {
+      "type": "object",
+      "required": [
+        "submitted_handle",
+        "canonical_handle",
+        "verification_status"
+      ],
+      "properties": {
+        "submitted_handle": {
+          "type": "string"
+        },
+        "canonical_handle": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "verification_status": {
+          "enum": [
+            "verified",
+            "unverified",
+            "renamed",
+            "duplicate",
+            "unavailable",
+            "unofficial"
+          ]
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "content": {
+      "type": "object",
+      "required": [
+        "platform",
+        "format"
+      ],
+      "properties": {
+        "platform": {
+          "type": "string"
+        },
+        "url": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "content_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "published_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "format": {
+          "type": "string"
+        },
+        "topic": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "event_context": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "evidence": {
+      "type": "object",
+      "required": [
+        "observations",
+        "metrics"
+      ],
+      "properties": {
+        "observations": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "metrics": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "value",
+              "evidence_level",
+              "source"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "value": {},
+              "evidence_level": {
+                "enum": [
+                  "E1",
+                  "E2",
+                  "E3",
+                  "E4",
+                  "E5"
+                ]
+              },
+              "source": {
+                "type": "string"
+              },
+              "formula": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "observed_at": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "analysis": {
+      "type": "object",
+      "required": [
+        "mechanisms",
+        "confidence",
+        "pattern_status"
+      ],
+      "properties": {
+        "mechanisms": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "interpretations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "confidence": {
+          "enum": [
+            "high",
+            "medium",
+            "low"
+          ]
+        },
+        "pattern_status": {
+          "enum": [
+            "single_example",
+            "repeated_account_pattern",
+            "cross_account_pattern",
+            "platform_pattern",
+            "polo_connect_validated"
+          ]
+        },
+        "utility_score": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 100
+        },
+        "performance_signal": {
+          "enum": [
+            "strong_relative_signal",
+            "positive_relative_signal",
+            "baseline_or_unclear",
+            "weak_relative_signal",
+            "insufficient_data"
+          ]
+        }
+      }
+    },
+    "transfer": {
+      "type": "object",
+      "required": [
+        "principle",
+        "polo_connect_application",
+        "originality_check"
+      ],
+      "properties": {
+        "principle": {
+          "type": "string"
+        },
+        "polo_connect_application": {
+          "type": "string"
+        },
+        "production_requirements": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "risks": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "test_hypothesis": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "originality_check": {
+          "type": "object",
+          "required": [
+            "passes",
+            "notes"
+          ],
+          "properties": {
+            "passes": {
+              "type": "boolean"
+            },
+            "notes": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "observed_at": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}
