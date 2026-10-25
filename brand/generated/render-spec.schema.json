@@ -19,6 +19,44 @@
     "provenance"
   ],
   "properties": {
+    "mode": {
+      "enum": [
+        "study",
+        "production"
+      ]
+    },
+    "finish": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [],
+      "properties": {
+        "depth_level": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        },
+        "accent_intensity": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        },
+        "graphic_density": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        },
+        "brand_energy": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        },
+        "background_complexity": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        }
+      }
+    },
     "version": {
       "const": "1"
     },

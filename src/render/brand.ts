@@ -21,6 +21,7 @@ export interface BrandSystem {
   version: string;
   status: string;
   assets: BrandAsset[];
+  productionAssets: BrandAsset[];
   colors: Record<string, string>;
   typography: { display: string; body: string; status: string };
 }
@@ -43,6 +44,21 @@ export function loadBrand(): BrandSystem {
     );
   }
   return system;
+}
+export function productionMark(theme: "dark" | "light"): BrandAsset {
+  const brand = loadBrand();
+  const mark = brand.productionAssets?.find(
+    (a) => a.id === (theme === "dark" ? "on-dark" : "on-light"),
+  );
+  ensure(
+    mark && existsSync(mark.path),
+    "Production brand pack missing; run npm run brand:build",
+  );
+  ensure(
+    fileDigest(mark.path) === mark.sha256,
+    "Production brand mark changed",
+  );
+  return mark;
 }
 export function dataUri(path: string): string {
   const type = (

@@ -5,6 +5,7 @@ import { ensure, hash } from "../common/core.js";
 import type { Asset, SkillOutputs } from "../domain/models.js";
 import { families, surfaces, type Family, type Surface } from "./catalog.js";
 import { loadBrand, fileDigest } from "./brand.js";
+import type { Finish, RenderMode } from "./finish.js";
 
 export interface Score {
   home: string;
@@ -47,6 +48,8 @@ export interface ArtDecision {
   theme: "dark" | "light";
 }
 export interface RenderSpec {
+  mode?: RenderMode;
+  finish?: Partial<Finish>;
   version: "1";
   id: string;
   surface: Surface;
@@ -117,6 +120,17 @@ export const renderSpecSchema = {
   $schema: "https://json-schema.org/draft/2020-12/schema",
   title: "Polo Connect RenderSpec v1",
   ...closed({
+    mode: { enum: ["study", "production"] },
+    finish: closed(
+      {
+        depth_level: { type: "integer", minimum: 0, maximum: 3 },
+        accent_intensity: { type: "integer", minimum: 0, maximum: 3 },
+        graphic_density: { type: "integer", minimum: 0, maximum: 3 },
+        brand_energy: { type: "integer", minimum: 0, maximum: 3 },
+        background_complexity: { type: "integer", minimum: 0, maximum: 3 },
+      },
+      [],
+    ),
     version: { const: "1" },
     id: { type: "string", pattern: "^[a-zA-Z0-9_-]{1,120}$" },
     surface: { enum: Object.keys(surfaces) },
@@ -194,6 +208,9 @@ export const renderSpecSchema = {
     }),
   }),
 };
+renderSpecSchema.required = renderSpecSchema.required.filter(
+  (key) => !["mode", "finish"].includes(key),
+);
 const ajv = new Ajv2020.default({ allErrors: true, strict: false });
 const validate = ajv.compile(renderSpecSchema);
 export function localPath(path: string): string {
@@ -222,6 +239,10 @@ export function assertSpec(
   const spec = value as unknown as RenderSpec;
   const d = spec.decision;
   const family = families[d.family];
+  ensure(
+    spec.logo === "icon",
+    "Horizontal logo is a reference; production pieces require the app icon",
+  );
   ensure(truth.verified, "blocked_verification");
   ensure(
     spec.provenance.eventId === truth.eventId &&
@@ -489,12 +510,14 @@ export function specFromPlan(
   const dimensions = surfaces[surface];
   return {
     version: "1",
+    mode: (plan.render_mode as RenderMode | undefined) ?? "production",
+    finish: plan.render_finish as Partial<Finish> | undefined,
     id: `${surface}-${hash({ plan, truth, sources }).slice(0, 16)}`,
     surface,
     width: dimensions[0],
     height: dimensions[1],
     decision: decisionFromPlan(plan, surface, sources, recent),
-    logo: surface === "reel_cover" ? "icon" : "horizontal",
+    logo: "icon",
     photo: photo
       ? {
           id: photo.id,

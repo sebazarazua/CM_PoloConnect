@@ -10,7 +10,7 @@ import {
   type RenderSpec,
   type TruthRecord,
 } from "./spec.js";
-import { fileDigest, loadBrand } from "./brand.js";
+import { fileDigest, loadBrand, productionMark } from "./brand.js";
 
 export interface RenderQA {
   passed: boolean;
@@ -176,7 +176,7 @@ export async function inspectPage(
   page: Page,
   spec: RenderSpec,
 ): Promise<RenderQA> {
-  const logo = loadBrand().assets.find((a) => a.id === spec.logo)!;
+  const logo = productionMark(spec.decision.theme);
   const vertical = ["story", "reel_cover"].includes(spec.surface);
   const safeTop =
     spec.surface === "reel_cover" ? 320 : spec.surface === "story" ? 220 : 40;

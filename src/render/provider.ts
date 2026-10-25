@@ -5,6 +5,7 @@ import { ensure, hash } from "../common/core.js";
 import { LocalRenderer } from "./renderer.js";
 import { specFromPlan, truthFromEvent } from "./spec.js";
 import type { Surface } from "./catalog.js";
+import type { RenderMode } from "./finish.js";
 
 /** Opt-in local renderer; never selects a model, approves or publishes. */
 export class LocalDesignRenderer implements DesignRenderer {
@@ -12,6 +13,7 @@ export class LocalDesignRenderer implements DesignRenderer {
   constructor(
     private output = resolve("outputs/render-demo"),
     private targets?: Surface[],
+    private mode: RenderMode = "production",
   ) {}
   close() {
     return this.renderer.close();
@@ -42,6 +44,7 @@ export class LocalDesignRenderer implements DesignRenderer {
         sources,
         context.recentFamilies,
       );
+      spec.mode = this.mode;
       if (surface === "story")
         spec.decision.family = spec.photo
           ? "result-photo-dominant"

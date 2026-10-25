@@ -1,7 +1,8 @@
-import { writeFileSync } from "node:fs";
+import { writeFileSync, readFileSync } from "node:fs";
 import sharp from "sharp";
 import { extractPalette, fileDigest } from "../src/render/brand.js";
 import { renderSpecSchema } from "../src/render/spec.js";
+import { buildAssetPack } from "../src/render/asset-pack.js";
 const sources = [
   {
     id: "horizontal",
@@ -30,6 +31,9 @@ const colors = {
   "text.secondary": "#b7c9d9",
   "accent.primary": nearest([34, 129, 226]),
   "accent.secondary": nearest([35, 142, 183]),
+  "accent.sky": "#66cdff",
+  "accent.ice": "#a5e6ff",
+  "surface.blue": "#154775",
   "status.live": "#cf3245",
   "status.result": nearest([34, 129, 226]),
   "status.breaking": "#cf3245",
@@ -106,11 +110,16 @@ save("brand/tokens/layout.json", {
   },
   note: "Conservative local design guides, not a certification of current Instagram UI. Revalidate on actual publishing route.",
 });
+const production = await buildAssetPack();
 save("brand/system.json", {
   name: "Polo Connect",
   status: "initial_derived_system",
-  version: "1",
+  version: "2",
   assets,
+  productionAssets: production.assets,
+  renderFinish: JSON.parse(
+    readFileSync("brand/tokens/finish.json", "utf8"),
+  ) as unknown,
   logos: assets.map((a) => a.path),
   colors,
   color_tokens: colors,
@@ -120,14 +129,14 @@ save("brand/system.json", {
   visual_rules: [
     "Authentic sports media only",
     "No synthetic documentary reality",
-    "No glow, fire, particles, neon or exaggerated shadows",
-    "Logo is an untouched image, never re-typeset",
+    "Controlled blue depth/highlights; no epic effects, neon, fire or smoke",
+    "Source logos unchanged; production mark normalized from app icon without redesign",
   ],
   sponsors: [],
   naming: {},
   tone_notes: [],
   missing: [
-    "higher-resolution transparent/vector official logo",
+    "native vector master for resolution-independent brand reproduction",
     "official editorial typography approval",
     "sponsor obligations when applicable",
   ],
@@ -139,6 +148,8 @@ const files = sources
   .concat(typography.files.map((f) => f.path));
 save("brand/assets/manifest.json", {
   assets,
+  productionPack: "brand/assets/production/manifest.json",
+  productionAssets: production.assets,
   fonts: typography.files,
   source: "https://github.com/google/fonts/tree/main/ofl/barlow",
   sourceCondensed:

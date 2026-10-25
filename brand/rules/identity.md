@@ -8,11 +8,12 @@ Los arcos parciales y líneas de cinco píxeles son dispositivos abstractos de t
 
 ## Marca
 
-- Usar un solo logo por pieza; horizontal para espacio ancho, icono para firma compacta/cover.
-- Conservar relación de aspecto, colores y píxeles originales. No recomponer ni reescribir el wordmark.
-- El horizontal suministrado incluye un fondo raster. Conservarlo como una firma contenida; no simular una versión transparente ni vectorial.
-- Evitar ampliar más allá de su resolución nativa: horizontal 628×231, icono 200×200. Estos originales no permiten prometer detalle vectorial en imprenta.
-- Zona de exclusión inicial: 24px a escala de 1080. Prominencia por defecto pequeña, sin competir con el resultado.
+- Usar el isotipo normalizado de la app como firma principal, con transparencia y variante adecuada al fondo.
+- El horizontal es referencia de paleta, branding y lenguaje visual. No se inserta como sticker raster en las piezas.
+- Los originales se preservan. El pack de producción elimina el backing de la app y normaliza colores sin redibujar ni reinterpretar al jinete/anillo.
+- Exports en 64/128/256/512/1024px; el origen sigue siendo 200px y los mayores son remuestreados. El manifiesto no los presenta como vector nativo.
+- Mantener proporción 1:1 y zona de exclusión. Sólo un mark por pieza.
+- Producción permite gradientes azules, highlights celestes y glow de superficie suave y acotado; evitar contornos luminosos, gaming y efectos épicos.
 
 ## Tipografía propuesta
 

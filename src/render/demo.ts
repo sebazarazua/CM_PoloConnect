@@ -22,7 +22,8 @@ import {
 import { LocalRenderer, type RenderReceipt } from "./renderer.js";
 import { escapeHTML } from "./html.js";
 import { loadBrand } from "./brand.js";
-import { redact } from '../common/core.js';
+import { redact } from "../common/core.js";
+import type { RenderMode } from "./finish.js";
 
 export function gallerySpec(
   base: RenderSpec,
@@ -62,7 +63,7 @@ export function gallerySpec(
             ? "score"
             : "type",
   };
-  spec.logo = surface === "reel_cover" ? "icon" : "horizontal";
+  spec.logo = "icon";
   spec.photo = null;
   spec.provenance.demoPlaceholder = true;
   spec.content.eyebrow = {
@@ -171,7 +172,11 @@ export function gallerySpec(
 export function galleryHTML(
   items: { name: string; spec: RenderSpec; receipt: RenderReceipt }[],
 ): string {
-  return `<!doctype html><html lang="es"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Polo Connect · Estudio visual</title><style>body{margin:0;background:#070d25;color:white;font:16px system-ui}header{padding:48px 5vw 28px;border-bottom:1px solid #2d5377}h1{font-size:44px;margin:0 0 16px}p{color:#b7c9d9;max-width:900px;line-height:1.6}nav{padding:24px 5vw;display:flex;gap:16px;flex-wrap:wrap}select{padding:12px;background:#12223c;color:white;border:1px solid #2d5377}main{padding:0 5vw 64px;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:36px}figure{margin:0}figure img{width:100%;height:420px;object-fit:contain;object-position:top;background:#12223c}figcaption{padding:16px 0;line-height:1.6}small{color:#b7c9d9}a{color:#8ebcff}figure[hidden]{display:none}footer{padding:32px 5vw;color:#b7c9d9}</style><header><h1>Polo Connect / Estudio visual</h1><p>Sistema editorial inicial · logos originales · HTML/CSS real. Todos los datos son ficticios. Los espacios de fotografía están identificados como placeholders; no representan partidos ni personas. Elegir una composición no equivale a aprobar su publicación.</p></header><nav><label>Superficie <select id="surface"><option value="">Todas</option>${Object.keys(
+  const edition =
+    items[0]?.spec.mode === "study"
+      ? "Estudio visual"
+      : "Edición de producción";
+  return `<!doctype html><html lang="es"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Polo Connect · ${edition}</title><style>body{margin:0;background:#070d25;color:white;font:16px system-ui}header{padding:48px 5vw 28px;border-bottom:1px solid #2d5377}h1{font-size:44px;margin:0 0 16px}p{color:#b7c9d9;max-width:900px;line-height:1.6}nav{padding:24px 5vw;display:flex;gap:16px;flex-wrap:wrap}select{padding:12px;background:#12223c;color:white;border:1px solid #2d5377}main{padding:0 5vw 64px;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:36px}figure{margin:0}figure img{width:100%;height:420px;object-fit:contain;object-position:top;background:#12223c}figcaption{padding:16px 0;line-height:1.6}small{color:#b7c9d9}a{color:#8ebcff}figure[hidden]{display:none}footer{padding:32px 5vw;color:#b7c9d9}</style><header><h1>Polo Connect / ${edition}</h1><p>Isotipo normalizado · sistema editorial con profundidad controlada · HTML/CSS real. Todos los datos son ficticios. Los espacios de fotografía están identificados como placeholders; no representan partidos ni personas. Elegir una composición no equivale a aprobar su publicación.</p></header><nav><label>Superficie <select id="surface"><option value="">Todas</option>${Object.keys(
     surfaces,
   )
     .map((s) => `<option>${s}</option>`)
@@ -180,13 +185,30 @@ export function galleryHTML(
     )}</select></label><label>Tema <select id="theme"><option value="">Todos</option><option>dark</option><option>light</option></select></label></nav><main>${items.map(({ name, spec, receipt }) => `<figure data-surface="${spec.surface}" data-theme="${spec.decision.theme}"><a href="${encodeURIComponent(name)}.png"><img src="${encodeURIComponent(name)}.png" loading="lazy" alt="${escapeHTML(spec.decision.family)} · demostración"></a><figcaption>${escapeHTML(name)}<br><small>${spec.width}×${spec.height} · ${spec.decision.theme} · ${spec.decision.brandIntensity}<br>QA técnico: ${receipt.qa.passed ? "PASS" : "BLOCK"} · contraste ≥ ${receipt.qa.minContrast.toFixed(1)}</small><br><a href="${encodeURIComponent(name)}.jpg">JPG</a> · <a href="${encodeURIComponent(name)}.manifest.json">Spec + QA</a></figcaption></figure>`).join("")}</main><footer>Sin publicación · revisión visual/editorial y aprobación humana pendientes. Safe areas conservadoras, sujetas a la UI de la ruta final.</footer><script>for(const el of document.querySelectorAll('select'))el.onchange=()=>{for(const item of document.querySelectorAll('figure'))item.hidden=(surface.value&&item.dataset.surface!==surface.value)||(theme.value&&item.dataset.theme!==theme.value)}</script></html>`;
 }
 export async function renderDemo(
-  options: { gallery?: boolean; realAI?: boolean; outDir?: string } = {},
+  options: {
+    gallery?: boolean;
+    realAI?: boolean;
+    outDir?: string;
+    mode?: RenderMode;
+  } = {},
 ) {
-  const out = resolve(options.outDir ?? "outputs/render-demo");
+  const mode = options.mode ?? "production";
+  const out = resolve(
+    options.outDir ??
+      (mode === "production"
+        ? "outputs/production-v2"
+        : "outputs/design-study"),
+  );
   mkdirSync(out, { recursive: true });
-  const design = new LocalDesignRenderer(out, ["feed", "story", "reel_cover"]),
+  const design = new LocalDesignRenderer(
+      out,
+      ["feed", "story", "reel_cover"],
+      mode,
+    ),
     renderer = new LocalRenderer(),
-    repository = options.realAI?new FileRepository(resolve('.local/visual-ai-demo.json')):new MemoryRepository();
+    repository = options.realAI
+      ? new FileRepository(resolve(`.local/visual-ai-demo-${mode}.json`))
+      : new MemoryRepository();
   const ai = loadAISettings();
   const executor = options.realAI
     ? new OpenAIResponsesSkillExecutor(ai)
@@ -213,6 +235,7 @@ export async function renderDemo(
       ["square", "square-result"],
     ] as const) {
       const spec = specFromPlan(plan, truth, surface);
+      spec.mode = mode;
       if (surface === "story") spec.decision.family = "story-result";
       if (surface === "reel_cover") spec.decision.family = "reel-cover-result";
       const receipt = await renderer.render(spec, truth, out, name);
@@ -288,6 +311,7 @@ export async function renderDemo(
       .toFile(resolve(out, "preview.png"));
     const state = await repository.read();
     const report = {
+      renderMode: mode,
       mode: options.realAI
         ? "real_ai_local_render"
         : "fixture_planning_real_pixels",
@@ -316,6 +340,7 @@ export async function renderDemo(
       JSON.stringify(state, null, 2) + "\n",
     );
     return {
+      renderMode: mode,
       directory: out,
       gallery: resolve(out, "index.html"),
       outputs: items.length,
@@ -326,10 +351,26 @@ export async function renderDemo(
       visualReview: report.visualReview,
       publishing: "disabled",
     };
-  } catch(error) {
-    const state=await repository.read();
-    writeFileSync(resolve(out,'workflow.json'),JSON.stringify(state,null,2));
-    writeFileSync(resolve(out,'failure-report.json'),JSON.stringify(redact({error:error instanceof Error?error.message:'Render workflow failed',usage:usageReport(state),publishing:'disabled',approval:'not_granted'}),null,2));
+  } catch (error) {
+    const state = await repository.read();
+    writeFileSync(
+      resolve(out, "workflow.json"),
+      JSON.stringify(state, null, 2),
+    );
+    writeFileSync(
+      resolve(out, "failure-report.json"),
+      JSON.stringify(
+        redact({
+          error:
+            error instanceof Error ? error.message : "Render workflow failed",
+          usage: usageReport(state),
+          publishing: "disabled",
+          approval: "not_granted",
+        }),
+        null,
+        2,
+      ),
+    );
     throw error;
   } finally {
     await design.close();

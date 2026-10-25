@@ -1,0 +1,296 @@
+{
+  "version": "2",
+  "source": "brand/assets/icons/polo-connect-app-icon.webp",
+  "sourceSha256": "d5cc8581fc8b950fcabeaa76f32a40e7b843f2674b680a153ab311de9f16d0d8",
+  "originalUnchanged": true,
+  "method": "source-aligned white-matte alpha extraction, backing removed, source geometry retained, deterministic color remapping",
+  "nativeSource": {
+    "width": 200,
+    "height": 200
+  },
+  "exports": [
+    {
+      "variant": "full-color",
+      "size": 64,
+      "path": "brand/assets/production/polo-connect-icon-full-color-64.png",
+      "sha256": "5812db137830173e379528b99f21ccbc63470c61030363d1264752af70e1bd3e"
+    },
+    {
+      "variant": "full-color",
+      "size": 128,
+      "path": "brand/assets/production/polo-connect-icon-full-color-128.png",
+      "sha256": "05312829f30acb087338ac1b44a3c9595d5859c38fbf5a0a50fb9fc47e17bd52"
+    },
+    {
+      "variant": "full-color",
+      "size": 256,
+      "path": "brand/assets/production/polo-connect-icon-full-color-256.png",
+      "sha256": "be649458389ec7c44add78a803208ce1b1ff38ef627913251b694930952b26bf"
+    },
+    {
+      "variant": "full-color",
+      "size": 512,
+      "path": "brand/assets/production/polo-connect-icon-full-color-512.png",
+      "sha256": "36d8948bd343fa2bbe9922804a675198c5d187bfb7ad364e5c36d4c3a562e472"
+    },
+    {
+      "variant": "full-color",
+      "size": 1024,
+      "path": "brand/assets/production/polo-connect-icon-full-color-1024.png",
+      "sha256": "605cfff3279a56dbc9d13ea8298600d88f361097f8b155f9b543cdcac85b935a"
+    },
+    {
+      "variant": "on-light",
+      "size": 64,
+      "path": "brand/assets/production/polo-connect-icon-on-light-64.png",
+      "sha256": "611a21b687e3a7c9f8c3d6825487ff45bc4da74ef0a5a4f0db36685351b74901"
+    },
+    {
+      "variant": "on-light",
+      "size": 128,
+      "path": "brand/assets/production/polo-connect-icon-on-light-128.png",
+      "sha256": "ff42cb30dc811dcbe82c37b8cd2594645e0020fd38140c14a188d4ea7c856214"
+    },
+    {
+      "variant": "on-light",
+      "size": 256,
+      "path": "brand/assets/production/polo-connect-icon-on-light-256.png",
+      "sha256": "f8a95db0c9d08ca5d0e185b7079df73cbe76260eebaf139a186bacb319a326a1"
+    },
+    {
+      "variant": "on-light",
+      "size": 512,
+      "path": "brand/assets/production/polo-connect-icon-on-light-512.png",
+      "sha256": "780e2d9953b5e83633dfa593d3cf5d67231841cabd8de606e1e8c4be5fa8582f"
+    },
+    {
+      "variant": "on-light",
+      "size": 1024,
+      "path": "brand/assets/production/polo-connect-icon-on-light-1024.png",
+      "sha256": "92e2d394f33ae187839f7f7da5be005f19d769a0def85c0111e689391e56d9d0"
+    },
+    {
+      "variant": "on-dark",
+      "size": 64,
+      "path": "brand/assets/production/polo-connect-icon-on-dark-64.png",
+      "sha256": "675119aabc6423ae48e54883f9184fe871c36b97ed208e42f8730a6f53010727"
+    },
+    {
+      "variant": "on-dark",
+      "size": 128,
+      "path": "brand/assets/production/polo-connect-icon-on-dark-128.png",
+      "sha256": "62413f5a2d688ec7eec709540b80cd57d867c21443068933b48449fff15ebab4"
+    },
+    {
+      "variant": "on-dark",
+      "size": 256,
+      "path": "brand/assets/production/polo-connect-icon-on-dark-256.png",
+      "sha256": "4511bf4eb628d30e56a1d3d33bb863227854508ee38d03f887973141b33453f1"
+    },
+    {
+      "variant": "on-dark",
+      "size": 512,
+      "path": "brand/assets/production/polo-connect-icon-on-dark-512.png",
+      "sha256": "9fa3e412482468691746aac7fc5646fcd1c978354bc412a16b964082ba02a57a"
+    },
+    {
+      "variant": "on-dark",
+      "size": 1024,
+      "path": "brand/assets/production/polo-connect-icon-on-dark-1024.png",
+      "sha256": "1e4f4cae2bd70757413deb394236ea69d962fc8593f45dd39e29bc2935785b0b"
+    },
+    {
+      "variant": "mono-white",
+      "size": 64,
+      "path": "brand/assets/production/polo-connect-icon-mono-white-64.png",
+      "sha256": "29956db454e6ff3e76e4a848653a194de87391f4cf886595ef244f80bf15f405"
+    },
+    {
+      "variant": "mono-white",
+      "size": 128,
+      "path": "brand/assets/production/polo-connect-icon-mono-white-128.png",
+      "sha256": "b18307d6780cb51bb8a8a225da89b9cce1f73fc52b294c4f8f1c9a69a1a3e087"
+    },
+    {
+      "variant": "mono-white",
+      "size": 256,
+      "path": "brand/assets/production/polo-connect-icon-mono-white-256.png",
+      "sha256": "f513428d005eb1a71c51d63692f5f909f04d0aff90b25352b9974f67bf285b5a"
+    },
+    {
+      "variant": "mono-white",
+      "size": 512,
+      "path": "brand/assets/production/polo-connect-icon-mono-white-512.png",
+      "sha256": "e5e2422a7c59ee9508fc46b5a736b6d88dc2fef783566e1170c90d3e9486248b"
+    },
+    {
+      "variant": "mono-white",
+      "size": 1024,
+      "path": "brand/assets/production/polo-connect-icon-mono-white-1024.png",
+      "sha256": "63c5bdcd6bbde0f7d3c52ff84b1154ff6541f351d4ecbe4faade36c555b1d7f5"
+    },
+    {
+      "variant": "mono-navy",
+      "size": 64,
+      "path": "brand/assets/production/polo-connect-icon-mono-navy-64.png",
+      "sha256": "9d409db7cb64786ce5fc787dd42c222f743592e2e27b4cf6c3a1a3959e4a1adf"
+    },
+    {
+      "variant": "mono-navy",
+      "size": 128,
+      "path": "brand/assets/production/polo-connect-icon-mono-navy-128.png",
+      "sha256": "92b7c76c209748fb09903b914b41eef5a5243580d837bdf74e1d3ce5457bc87f"
+    },
+    {
+      "variant": "mono-navy",
+      "size": 256,
+      "path": "brand/assets/production/polo-connect-icon-mono-navy-256.png",
+      "sha256": "f6205fb857c4e5dad4dfb13f23c2e4e28dc91ed1cd95b74e3b7b27ab66293dcf"
+    },
+    {
+      "variant": "mono-navy",
+      "size": 512,
+      "path": "brand/assets/production/polo-connect-icon-mono-navy-512.png",
+      "sha256": "bba27ff1ef0ff384f837b953df1027bd5eb44d68622092a8ec74b29e1d7adfb0"
+    },
+    {
+      "variant": "mono-navy",
+      "size": 1024,
+      "path": "brand/assets/production/polo-connect-icon-mono-navy-1024.png",
+      "sha256": "e2f49e6305684c6a19b3c8dac9990b66b4b304aaa527ae1669b112d94d5c7796"
+    },
+    {
+      "variant": "high-contrast-dark",
+      "size": 64,
+      "path": "brand/assets/production/polo-connect-icon-high-contrast-dark-64.png",
+      "sha256": "be07e2eaf3b355b9a4c1cb05a00acc6ef1694dcc870f262a8e83ffeddb358d97"
+    },
+    {
+      "variant": "high-contrast-dark",
+      "size": 128,
+      "path": "brand/assets/production/polo-connect-icon-high-contrast-dark-128.png",
+      "sha256": "62efb9d52e9e8184d1df74ebb9e57468e7f3bbe13f0e885a030e7d03560dcdda"
+    },
+    {
+      "variant": "high-contrast-dark",
+      "size": 256,
+      "path": "brand/assets/production/polo-connect-icon-high-contrast-dark-256.png",
+      "sha256": "22fa95f0d50b1289d6a022ae18f08476a89147595a41d43f4ad07f50167f5f5a"
+    },
+    {
+      "variant": "high-contrast-dark",
+      "size": 512,
+      "path": "brand/assets/production/polo-connect-icon-high-contrast-dark-512.png",
+      "sha256": "9ada56d821fe7f2ed5e491ad44c981d90c6d042b41b58d3e19ab798612a00df9"
+    },
+    {
+      "variant": "high-contrast-dark",
+      "size": 1024,
+      "path": "brand/assets/production/polo-connect-icon-high-contrast-dark-1024.png",
+      "sha256": "5c4c120a25158b1348c968683d1a212fe88fc83ed518bff61ec1b6b13f19c5d1"
+    },
+    {
+      "variant": "high-contrast-light",
+      "size": 64,
+      "path": "brand/assets/production/polo-connect-icon-high-contrast-light-64.png",
+      "sha256": "b648276431ce07f0572e18d5ad252fb1dfdff84b975e0f8304b0653d5434ad63"
+    },
+    {
+      "variant": "high-contrast-light",
+      "size": 128,
+      "path": "brand/assets/production/polo-connect-icon-high-contrast-light-128.png",
+      "sha256": "f06e5562432ffd77e923afd4a2c73925ec3c81edbf27b42b846dd96c485e3618"
+    },
+    {
+      "variant": "high-contrast-light",
+      "size": 256,
+      "path": "brand/assets/production/polo-connect-icon-high-contrast-light-256.png",
+      "sha256": "aa56e62d403b427a67d6dd1c141a223ec6b645e155229b693f5c98110f51ae5d"
+    },
+    {
+      "variant": "high-contrast-light",
+      "size": 512,
+      "path": "brand/assets/production/polo-connect-icon-high-contrast-light-512.png",
+      "sha256": "f76b8ac7dd646164d113bf7b74f84700ffd8c34671062a12fcf9bec22e08653d"
+    },
+    {
+      "variant": "high-contrast-light",
+      "size": 1024,
+      "path": "brand/assets/production/polo-connect-icon-high-contrast-light-1024.png",
+      "sha256": "ff544c0be1b65687d19755fbea2f3116f9bb6599b889226bc949e28ea9129081"
+    }
+  ],
+  "productionAssets": [
+    {
+      "id": "full-color",
+      "path": "brand/assets/production/polo-connect-icon-full-color-256.png",
+      "sha256": "be649458389ec7c44add78a803208ce1b1ff38ef627913251b694930952b26bf",
+      "width": 256,
+      "height": 256,
+      "source": "deterministic normalization of owner app icon",
+      "rights": "owned",
+      "role": "production_brand_mark"
+    },
+    {
+      "id": "on-light",
+      "path": "brand/assets/production/polo-connect-icon-on-light-256.png",
+      "sha256": "f8a95db0c9d08ca5d0e185b7079df73cbe76260eebaf139a186bacb319a326a1",
+      "width": 256,
+      "height": 256,
+      "source": "deterministic normalization of owner app icon",
+      "rights": "owned",
+      "role": "production_brand_mark"
+    },
+    {
+      "id": "on-dark",
+      "path": "brand/assets/production/polo-connect-icon-on-dark-256.png",
+      "sha256": "4511bf4eb628d30e56a1d3d33bb863227854508ee38d03f887973141b33453f1",
+      "width": 256,
+      "height": 256,
+      "source": "deterministic normalization of owner app icon",
+      "rights": "owned",
+      "role": "production_brand_mark"
+    },
+    {
+      "id": "mono-white",
+      "path": "brand/assets/production/polo-connect-icon-mono-white-256.png",
+      "sha256": "f513428d005eb1a71c51d63692f5f909f04d0aff90b25352b9974f67bf285b5a",
+      "width": 256,
+      "height": 256,
+      "source": "deterministic normalization of owner app icon",
+      "rights": "owned",
+      "role": "production_brand_mark"
+    },
+    {
+      "id": "mono-navy",
+      "path": "brand/assets/production/polo-connect-icon-mono-navy-256.png",
+      "sha256": "f6205fb857c4e5dad4dfb13f23c2e4e28dc91ed1cd95b74e3b7b27ab66293dcf",
+      "width": 256,
+      "height": 256,
+      "source": "deterministic normalization of owner app icon",
+      "rights": "owned",
+      "role": "production_brand_mark"
+    },
+    {
+      "id": "high-contrast-dark",
+      "path": "brand/assets/production/polo-connect-icon-high-contrast-dark-256.png",
+      "sha256": "22fa95f0d50b1289d6a022ae18f08476a89147595a41d43f4ad07f50167f5f5a",
+      "width": 256,
+      "height": 256,
+      "source": "deterministic normalization of owner app icon",
+      "rights": "owned",
+      "role": "production_brand_mark"
+    },
+    {
+      "id": "high-contrast-light",
+      "path": "brand/assets/production/polo-connect-icon-high-contrast-light-256.png",
+      "sha256": "aa56e62d403b427a67d6dd1c141a223ec6b645e155229b693f5c98110f51ae5d",
+      "width": 256,
+      "height": 256,
+      "source": "deterministic normalization of owner app icon",
+      "rights": "owned",
+      "role": "production_brand_mark"
+    }
+  ],
+  "notes": "1024 exports are resampled from the 200px original; no invented high-resolution detail or claimed vector master."
+}

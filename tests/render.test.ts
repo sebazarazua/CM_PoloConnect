@@ -70,7 +70,7 @@ it("official logos retain original bytes, dimensions and aspect ratios", () => {
     height: 200,
   });
   for (const a of brand.assets) expect(fileDigest(a.path)).toBe(a.sha256);
-  expect(first.qa.logoRatio).toBeCloseTo(628 / 231, 2);
+  expect(first.qa.logoRatio).toBeCloseTo(1, 2);
 });
 it("palette extraction is repeatable and semantic anchors come from the actual assets", async () => {
   const paths = loadBrand().assets.map((a) => a.path),

@@ -12,6 +12,7 @@ import {
 if (existsSync(".env")) process.loadEnvFile(".env");
 const { values } = parseArgs({
   options: {
+    mode: { type: "string" },
     gallery: { type: "boolean" },
     "real-ai": { type: "boolean" },
     input: { type: "string" },
@@ -21,6 +22,8 @@ const { values } = parseArgs({
   },
 });
 try {
+  if (values.mode && !["study", "production"].includes(values.mode))
+    throw new Error("Mode must be study or production");
   if (values.input) {
     if (values["real-ai"])
       throw new Error(
@@ -29,7 +32,10 @@ try {
     console.log(
       JSON.stringify(
         await renderResultInput(
-          JSON.parse(readFileSync(values.input, "utf8")) as ResultInput,
+          {
+            ...JSON.parse(readFileSync(values.input, "utf8")),
+            ...(values.mode ? { mode: values.mode } : {}),
+          } as ResultInput,
           resolve(values.out ?? "outputs/result"),
         ),
         null,
@@ -46,7 +52,12 @@ try {
       console.log(
         JSON.stringify(
           await renderer.render(
-            specFile(values.spec),
+            {
+              ...specFile(values.spec),
+              ...(values.mode
+                ? { mode: values.mode as "study" | "production" }
+                : {}),
+            },
             JSON.parse(readFileSync(values.truth, "utf8")) as TruthRecord,
             resolve(values.out ?? "outputs/custom-render"),
           ),
@@ -64,6 +75,7 @@ try {
           gallery: values.gallery,
           realAI: values["real-ai"],
           outDir: values.out,
+          mode: values.mode as "study" | "production" | undefined,
         }),
         null,
         2,

@@ -9,7 +9,9 @@ import { loadConfig } from "../config/index.js";
 import { fileDigest, loadBrand } from "./brand.js";
 import { specFromPlan, type TruthRecord, type ArtDecision } from "./spec.js";
 import { LocalRenderer } from "./renderer.js";
+import type { RenderMode } from "./finish.js";
 export interface ResultInput {
+  mode?: RenderMode;
   eventId: string;
   eventVersion: number;
   verified: boolean;
@@ -186,6 +188,7 @@ export async function renderResultInput(
       ["reel_cover", "reel-cover"],
     ] as const) {
       const spec = specFromPlan(plan, truth, surface, sources);
+      spec.mode = input.mode ?? "production";
       if (input.decision && surface !== "feed")
         spec.decision = {
           ...spec.decision,

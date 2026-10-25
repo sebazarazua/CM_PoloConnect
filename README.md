@@ -4,7 +4,7 @@ Proyecto de desarrollo en la raíz Git. TypeScript/Node, Prisma/PostgreSQL, repo
 
 ## Sistema visual local
 
-Los dos logos aportados están registrados sin alteraciones. Hay tokens de marca derivados, tipografía editorial provisional Barlow, 32 variantes de composición, RenderSpec cerrado y renderer HTML/CSS + Chromium. Exporta PNG/JPG reales, con comprobaciones de derechos, score, contraste, overflow, aspect ratio y safe areas. Los mocks anteriores se conservan.
+Los originales aportados están registrados sin alteraciones. El isotipo transparente normalizado es la firma de producción; el horizontal queda como referencia. Hay un pack de siete variantes, tokens de acabado, modos study/production, tipografía editorial Barlow, 32 variantes de composición, RenderSpec cerrado y renderer HTML/CSS + Chromium. Exporta PNG/JPG reales, con comprobaciones de derechos, score, contraste, overflow, aspect ratio y safe areas. Los mocks anteriores se conservan.
 
 ```powershell
 npm.cmd run render:install
@@ -13,9 +13,9 @@ npm.cmd run cm:gallery
 npm.cmd run test:render
 ```
 
-Abrir `outputs/render-demo/index.html` para comparar familias, temas y tamaños. El demo usa datos ficticios y placeholders identificados porque aún no se aportó foto deportiva; no genera caballos/jugadores. No publica ni aprueba. El Quality Reviewer recibe el PNG final; el executor fixture no equivale a una inspección IA ejecutada. El modo remoto requiere habilitación explícita y presupuesto: `npm.cmd run cm:render-demo -- --real-ai`.
+Abrir `outputs/production-v2/index.html` para comparar familias, temas y tamaños. El demo usa datos ficticios y placeholders identificados porque aún no se aportó foto deportiva; no genera caballos/jugadores. No publica ni aprueba. El Quality Reviewer recibe el PNG final; el executor fixture no equivale a una inspección IA ejecutada. El modo remoto requiere habilitación explícita y presupuesto: `npm.cmd run cm:render-demo -- --real-ai`.
 
-Para ingresar resultado + foto autorizada: partir de `fixtures/render/result.input.example.json`, agregar fuente/crédito/derechos de `photo` y ejecutar `npm.cmd run cm:render -- --input "C:/ruta/resultado-verificado.json"`. Los datos deben llegar verificados; el renderer no realiza investigación. Sin `--real-ai`, planning es fixture y el render no gasta tokens. [Manual visual, contratos y límites](docs/VISUAL_SYSTEM.md).
+Para ingresar resultado + foto autorizada: partir de `fixtures/render/result.input.example.json`, agregar fuente/crédito/derechos de `photo` y ejecutar `npm.cmd run cm:render -- --input "C:/ruta/resultado-verificado.json"`. Los datos deben llegar verificados; el renderer no realiza investigación. Sin `--real-ai`, planning es fixture y el render no gasta tokens. [Acabado de producción v2 y modos](docs/PRODUCTION_FINISH.md). Para el prototipo: `npm.cmd run cm:render-demo -- --mode study`.
 
 ## Entorno Windows
 

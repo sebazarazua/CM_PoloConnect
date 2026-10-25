@@ -15,6 +15,9 @@
     "text.secondary": "#b7c9d9",
     "accent.primary": "#247ce6",
     "accent.secondary": "#2a83bb",
+    "accent.sky": "#66cdff",
+    "accent.ice": "#a5e6ff",
+    "surface.blue": "#154775",
     "status.live": "#cf3245",
     "status.result": "#247ce6",
     "status.breaking": "#cf3245"

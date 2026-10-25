@@ -59,6 +59,16 @@ export const decisionContract = {
   photoTreatment: ["natural", "contrast", "none"],
   brandIntensity: ["subtle", "standard", "strong"],
   theme: ["dark", "light"],
+  renderModeField: "render_mode",
+  renderMode: ["study", "production"],
+  finishField: "render_finish",
+  finishControls: {
+    depth_level: [0, 3],
+    accent_intensity: [0, 3],
+    graphic_density: [0, 3],
+    brand_energy: [0, 3],
+    background_complexity: [0, 3],
+  },
   instruction:
     "Return render_decision as an additional top-level object of social-design-plan (existing schema permits extensions). No HTML/CSS. Choose photo families only for an authorized real image with sufficient quality. Preserve supplied exact display copy and fact ledger. Exclude recent families when an equally appropriate alternative exists.",
 };
