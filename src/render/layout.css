@@ -1,0 +1,699 @@
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background: #070d25;
+}
+#art {
+  position: relative;
+  width: 1080px;
+  height: var(--height);
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: Barlow, sans-serif;
+  transform: scale(var(--scale));
+  transform-origin: 0 0;
+  -webkit-font-smoothing: antialiased;
+  font-synthesis: none;
+}
+.brand-stripe {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 12px;
+  height: 100%;
+  background: var(--accent);
+}
+.arc {
+  position: absolute;
+  right: -360px;
+  top: 120px;
+  width: 850px;
+  height: 850px;
+  border: 2px solid var(--line);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.arc:after {
+  content: "";
+  position: absolute;
+  inset: 70px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+}
+header {
+  position: absolute;
+  top: 56px;
+  left: 64px;
+  right: 64px;
+  height: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+.logo {
+  width: 250px;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+.logo.icon {
+  width: 96px;
+}
+.edition {
+  text-align: right;
+  font-size: 22px;
+  line-height: 1.4;
+  letter-spacing: 2px;
+  font-weight: 600;
+  max-width: 400px;
+}
+.edition .muted {
+  font-size: 19px;
+  letter-spacing: 1px;
+}
+main {
+  position: absolute;
+  left: 64px;
+  right: 64px;
+  top: 246px;
+  bottom: 178px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 32px;
+}
+.eyebrow {
+  font-weight: 600;
+  font-size: 26px;
+  letter-spacing: 5px;
+  line-height: 1.3;
+  text-transform: uppercase;
+  max-width: 100%;
+  color: var(--label);
+}
+.eyebrow:before {
+  content: "";
+  display: inline-block;
+  width: 32px;
+  height: 5px;
+  background: currentColor;
+  margin-right: 16px;
+  vertical-align: middle;
+}
+.headline {
+  font-family: Display, sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 104px;
+  line-height: 0.98;
+  letter-spacing: -0.4px;
+  margin: 0;
+  max-height: 320px;
+  overflow: visible;
+  overflow-wrap: normal;
+}
+.deck {
+  font-size: 34px;
+  line-height: 1.35;
+  max-width: 850px;
+  margin: 0;
+}
+.muted {
+  color: var(--muted);
+}
+.scoreboard {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.team {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: 24px;
+  align-items: center;
+  padding: 16px 0 26px;
+  border-bottom: 1px solid var(--line);
+}
+.team .name {
+  font-family: Display, sans-serif;
+  text-transform: uppercase;
+  font-size: 76px;
+  font-weight: 600;
+  line-height: 1.04;
+  max-height: 170px;
+  overflow: visible;
+}
+.points {
+  font-family: Display, sans-serif;
+  font-size: 220px;
+  line-height: 0.9;
+  font-weight: 700;
+  text-align: right;
+  letter-spacing: -5px;
+  font-variant-numeric: tabular-nums;
+}
+.team:first-child .points {
+  color: var(--score);
+}
+.team:last-child .points {
+  color: var(--fg);
+}
+.context {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 14px;
+}
+.context .stage {
+  font-weight: 600;
+  font-size: 26px;
+  letter-spacing: 4px;
+}
+.context .tournament {
+  font-family: Display, sans-serif;
+  text-transform: uppercase;
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 1.12;
+}
+.divider {
+  height: 5px;
+  width: 72px;
+  background: var(--accent);
+  margin-bottom: 16px;
+}
+footer {
+  position: absolute;
+  left: 64px;
+  right: 64px;
+  bottom: 56px;
+  display: flex;
+  gap: 24px;
+  justify-content: space-between;
+  align-items: end;
+  border-top: 1px solid var(--line);
+  padding-top: 22px;
+  font-size: 22px;
+  line-height: 1.3;
+}
+.footer-copy {
+  max-width: 700px;
+}
+.folio {
+  font-family: Display, sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.credit {
+  font-size: 18px;
+  max-width: 700px;
+}
+.sponsor {
+  max-width: 200px;
+  text-align: right;
+}
+.sponsor img {
+  max-width: 180px;
+  height: 56px;
+  object-fit: contain;
+}
+.sponsor-label {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+.placeholder,
+.hero {
+  width: 100%;
+  height: 430px;
+  min-height: 280px;
+  position: relative;
+  overflow: hidden;
+  background: var(--photo-bg);
+  border: 1px solid var(--line);
+}
+.hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--focal-x) var(--focal-y);
+}
+.photo-natural {
+  filter: none;
+}
+.photo-contrast {
+  filter: contrast(1.05);
+}
+.placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--muted);
+}
+.placeholder strong {
+  font-family: Display, sans-serif;
+  font-weight: 600;
+  font-size: 46px;
+  letter-spacing: 2px;
+}
+.placeholder span {
+  font-size: 22px;
+  letter-spacing: 3px;
+}
+.field-line {
+  position: absolute;
+  border: 1px solid var(--line);
+  inset: 40px 70px;
+  pointer-events: none;
+}
+.field-line:after {
+  content: "";
+  position: absolute;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  height: 120px;
+  width: 120px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.photo-layout main {
+  top: 215px;
+  gap: 24px;
+  justify-content: flex-start;
+}
+.photo-layout .hero,
+.photo-layout .placeholder {
+  flex: 1;
+  min-height: 280px;
+  max-height: 560px;
+}
+.photo-layout .scoreboard {
+  flex-direction: row;
+  gap: 32px;
+}
+.photo-layout .team {
+  width: 50%;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+  grid-template-columns: 1fr 130px;
+}
+.photo-layout .team .name {
+  font-size: 45px;
+  max-height: 110px;
+}
+.photo-layout .points {
+  font-size: 122px;
+  letter-spacing: -2px;
+}
+.photo-layout .headline {
+  font-size: 86px;
+  max-height: 200px;
+}
+.photo-layout .context {
+  margin: 0;
+}
+.photo-layout .context .stage {
+  font-size: 22px;
+}
+.photo-layout .context .tournament {
+  font-size: 36px;
+}
+.minimal main {
+  gap: 40px;
+}
+.minimal .scoreboard {
+  flex-direction: row;
+  gap: 56px;
+}
+.minimal .team {
+  width: 50%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  border: 0;
+  padding: 0;
+}
+.minimal .team .name {
+  font-size: 58px;
+  min-height: 124px;
+}
+.minimal .points {
+  font-size: 250px;
+  text-align: left;
+}
+.minimal .arc {
+  display: none;
+}
+.minimal .headline {
+  font-size: 96px;
+}
+.headline-layout .headline {
+  font-size: 126px;
+  max-height: 510px;
+}
+.headline-layout .context {
+  margin-top: 24px;
+}
+.quote-mark {
+  font-family: Display, sans-serif;
+  color: var(--score);
+  font-size: 210px;
+  line-height: 0.45;
+}
+.quote-text {
+  font-family: Display, sans-serif;
+  font-size: 92px;
+  line-height: 1.05;
+  font-weight: 600;
+  max-height: 480px;
+}
+.attribution {
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 1px;
+}
+.stat-number {
+  font-family: Display, sans-serif;
+  color: var(--score);
+  font-size: 280px;
+  line-height: 0.95;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.stat-label {
+  font-size: 36px;
+  line-height: 1.2;
+}
+.unit {
+  font-size: 60px;
+  margin-left: 12px;
+}
+.comparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+}
+.comparison .stat-number {
+  font-size: 180px;
+}
+.schedule {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.schedule-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 32px;
+  line-height: 1.2;
+}
+.schedule-row strong {
+  font-family: Display, sans-serif;
+  font-size: 48px;
+  white-space: nowrap;
+}
+.matchup .versus {
+  font-family: Display, sans-serif;
+  font-size: 48px;
+  letter-spacing: 4px;
+  color: var(--muted);
+  margin: 24px 0;
+}
+.matchup .team-name {
+  font-family: Display, sans-serif;
+  font-size: 112px;
+  text-transform: uppercase;
+  line-height: 1.02;
+  font-weight: 700;
+  max-height: 240px;
+}
+.context-layout .headline {
+  font-size: 86px;
+}
+.context-layout .deck {
+  font-size: 42px;
+  line-height: 1.4;
+  max-height: 390px;
+}
+.vertical header {
+  top: 80px;
+}
+.vertical main {
+  top: 340px;
+  bottom: 380px;
+  gap: 48px;
+}
+.vertical .team .name {
+  font-size: 80px;
+}
+.vertical .points {
+  font-size: 238px;
+}
+.vertical .context {
+  margin-top: 34px;
+}
+.vertical .context .tournament {
+  font-size: 56px;
+}
+.vertical footer {
+  bottom: 160px;
+}
+.vertical .headline {
+  font-size: 136px;
+  max-height: 600px;
+}
+.vertical .hero,
+.vertical .placeholder {
+  min-height: 340px;
+  max-height: 540px;
+}
+.vertical.photo-layout main {
+  top: 320px;
+  bottom: 350px;
+  gap: 32px;
+}
+.vertical.photo-layout .headline {
+  font-size: 108px;
+  max-height: 330px;
+}
+.vertical.photo-layout .team .name {
+  font-size: 48px;
+}
+.vertical.photo-layout .points {
+  font-size: 134px;
+}
+.vertical.photo-layout .context {
+  margin: 0;
+}
+.vertical.photo-layout .context .tournament {
+  font-size: 44px;
+}
+.reel_cover .logo {
+  width: 96px;
+}
+.reel_cover main {
+  top: 360px;
+  bottom: 380px;
+}
+.reel_cover .eyebrow {
+  font-size: 30px;
+}
+.reel_cover .team .name {
+  font-size: 82px;
+}
+.interaction {
+  position: absolute;
+  left: 210px;
+  right: 210px;
+  bottom: 310px;
+  border: 2px dashed var(--line);
+  border-radius: 16px;
+  padding: 22px;
+  font-size: 25px;
+  text-align: center;
+  color: var(--muted);
+}
+.vertical.has-interaction main {
+  bottom: 510px;
+  gap: 28px;
+}
+.vertical.has-interaction .headline {
+  font-size: 112px;
+}
+.has-interaction .points {
+  font-size: 200px;
+}
+.square main {
+  top: 220px;
+  bottom: 150px;
+  gap: 24px;
+}
+.square .points {
+  font-size: 170px;
+}
+.square .team .name {
+  font-size: 64px;
+}
+.square .headline {
+  font-size: 94px;
+  max-height: 340px;
+}
+.square .context .tournament {
+  font-size: 36px;
+}
+.square.photo-layout .hero,
+.square.photo-layout .placeholder {
+  min-height: 180px;
+  max-height: 260px;
+}
+.square.photo-layout .points {
+  font-size: 110px;
+}
+.square.photo-layout .team .name {
+  font-size: 40px;
+}
+.square .team {
+  padding: 8px 0 16px;
+}
+.square .context {
+  margin: 0;
+}
+.square footer {
+  bottom: 40px;
+  font-size: 20px;
+}
+.square .quote-text {
+  font-size: 74px;
+  max-height: 330px;
+}
+.square .stat-number {
+  font-size: 220px;
+}
+.square .comparison .stat-number {
+  font-size: 160px;
+}
+.square .schedule-row {
+  padding: 16px 0;
+}
+.intensity-subtle .brand-stripe {
+  width: 4px;
+}
+.intensity-subtle .arc {
+  display: none;
+}
+.intensity-subtle .logo {
+  width: 210px;
+}
+.intensity-subtle .logo.icon {
+  width: 80px;
+}
+.intensity-strong .brand-stripe {
+  width: 24px;
+}
+.intensity-strong .arc {
+  border-width: 4px;
+}
+.intensity-strong .divider {
+  width: 160px;
+}
+.breaking .eyebrow,
+.live .eyebrow {
+  color: var(--status);
+}
+.points,
+.team .name,
+.headline,
+.quote-text,
+.stat-number,
+.matchup .team-name {
+  line-height: 1.2;
+}
+.family-result-celebration main > .eyebrow {
+  order: 0;
+}
+.family-result-celebration .scoreboard {
+  order: 1;
+}
+.family-result-celebration .hero,
+.family-result-celebration .placeholder {
+  order: 2;
+}
+.family-result-celebration .context {
+  order: 3;
+}
+.family-news-breaking .headline {
+  border-left: 8px solid var(--status);
+  padding-left: 28px;
+}
+.family-news-announcement .headline {
+  border-bottom: 5px solid var(--accent);
+  padding-bottom: 28px;
+}
+.family-horse-feature .headline,
+.family-reel-cover-player .headline {
+  order: 0;
+}
+.family-horse-feature .hero,
+.family-horse-feature .placeholder,
+.family-reel-cover-player .hero,
+.family-reel-cover-player .placeholder {
+  order: 1;
+}
+.family-horse-feature .context,
+.family-reel-cover-player .context {
+  order: 2;
+}
+.minimal .team:first-child {
+  padding-right: 24px;
+  border-right: 1px solid var(--line);
+}
+.minimal .team .name {
+  font-size: 54px;
+}
+.vertical.has-sponsor footer {
+  bottom: 330px;
+}
+.vertical.has-sponsor main {
+  bottom: 500px;
+}
+.vertical.has-sponsor.has-interaction .interaction {
+  bottom: 440px;
+}
+.vertical.has-sponsor.has-interaction main {
+  bottom: 650px;
+}
+.photo-layout.hierarchy-score main > .eyebrow {
+  order: 0;
+}
+.photo-layout.hierarchy-score .scoreboard {
+  order: 1;
+}
+.photo-layout.hierarchy-score .hero,
+.photo-layout.hierarchy-score .placeholder {
+  order: 2;
+}
+.photo-layout.hierarchy-score .context {
+  order: 3;
+}
+.density-standard main {
+  gap: 24px;
+}
+.density-standard .eyebrow {
+  letter-spacing: 3px;
+}

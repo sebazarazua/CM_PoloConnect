@@ -1,0 +1,32 @@
+{
+  "version": "1",
+  "surfaces": {
+    "feed": {
+      "width": 1080,
+      "height": 1350
+    },
+    "square": {
+      "width": 1080,
+      "height": 1080
+    },
+    "story": {
+      "width": 1080,
+      "height": 1920,
+      "safeTop": 220,
+      "safeBottom": 300
+    },
+    "reel_cover": {
+      "width": 1080,
+      "height": 1920,
+      "safeTop": 320,
+      "safeBottom": 320,
+      "gridPreview": {
+        "x": 0,
+        "y": 285,
+        "width": 1080,
+        "height": 1350
+      }
+    }
+  },
+  "note": "Conservative local design guides, not a certification of current Instagram UI. Revalidate on actual publishing route."
+}

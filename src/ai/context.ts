@@ -4,6 +4,8 @@ import { current, type SkillName, type Store } from "../domain/models.js";
 import { hash } from "../common/core.js";
 import type { SkillInput } from "../skills/runtime.js";
 import type { AISettings, PreparedContext } from "./types.js";
+import { finalRenderInputs } from "../render/visual-input.js";
+import { decisionContract, families } from "../render/catalog.js";
 
 export interface RecentContentSummary {
   totalInWindow: number;
@@ -18,6 +20,7 @@ export interface RecentContentSummary {
     series: string | null;
     cta: string | null;
     opportunityId: string | null;
+    compositionFamily: string | null;
   }>;
   saturationSignals: Array<{ dimension: string; value: string; count: number }>;
 }
@@ -56,6 +59,10 @@ export function recentSummary(
       series: text(current(c.metadata)?.data.series),
       cta: current(c.copies)?.data.outputs.cta ?? null,
       opportunityId: c.opportunity?.opportunity_id ?? null,
+      compositionFamily: text(
+        current(c.assets)?.data.find((a) => a.stage === "rendered")?.metadata
+          .compositionFamily,
+      ),
     };
   });
   const dimensions = [
@@ -65,6 +72,7 @@ export function recentSummary(
     "series",
     "cta",
     "opportunityId",
+    "compositionFamily",
   ] as const;
   const signals: RecentContentSummary["saturationSignals"] = [];
   for (const dim of dimensions) {
@@ -155,7 +163,7 @@ export function editorialSummary(
     brand: JSON.parse(
       readFileSync(resolve("brand/system.json"), "utf8"),
     ) as unknown,
-    mode: "local_mock_media",
+    mode: "local_media; inspect per-asset actualMedia and simulated flags",
     humanApprovalRequired: true,
   };
 }
@@ -238,7 +246,29 @@ export function preparedContext(
   return {
     skillCore: instructions,
     relevantReferences: references,
-    taskContext: input.context ?? null,
+    taskContext:
+      skill === "social-designer"
+        ? {
+            ...((input.context as object) ?? {}),
+            renderDirection: {
+              ...decisionContract,
+              families: Object.entries(families)
+                .filter(([, f]) =>
+                  input.event?.event_type === "match_result"
+                    ? ["result", "story"].includes(f.group)
+                    : true,
+                )
+                .map(([name]) => name),
+            },
+          }
+        : (input.context ?? null),
     structuredInputs: structuredInputs(skill, input),
+    ...(skill === "quality-reviewer"
+      ? {
+          visualAssets: finalRenderInputs(
+            current(input.content?.assets ?? [])?.data ?? [],
+          ),
+        }
+      : {}),
   };
 }

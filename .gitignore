@@ -15,3 +15,6 @@ assets/rendered/*
 assets/archive/*
 !assets/**/.gitkeep
 coverage/
+outputs/
+brand/references/inbox/*
+!brand/references/inbox/README.md

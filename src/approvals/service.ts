@@ -1,4 +1,5 @@
 import { ensure, hash, id, now } from "../common/core.js";
+import { finalRenderInputs } from "../render/visual-input.js";
 import {
   current,
   type Approval,
@@ -34,6 +35,11 @@ export function pendingApproval(item: ContentItem): Approval {
   return approval;
 }
 export function validApproval(item: ContentItem): Approval | undefined {
+  try {
+    finalRenderInputs(current(item.assets)?.data ?? []);
+  } catch {
+    return undefined;
+  }
   const a = item.approvals.at(-1);
   return a?.state === "approved" &&
     !a.invalidatedAt &&
@@ -50,6 +56,7 @@ export function approve(
   comment?: string,
 ): Approval {
   ensure(actor.trim(), "An identified human approver is required");
+  finalRenderInputs(current(item.assets)?.data ?? []);
   ensure(
     item.status === "ready_for_human_approval",
     "Content is not awaiting approval",

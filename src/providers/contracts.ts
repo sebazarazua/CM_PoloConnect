@@ -38,6 +38,11 @@ export interface DesignRenderer {
   render(
     plan: SkillOutputs["social-designer"],
     sources: Asset[],
+    context?: {
+      event: SkillOutputs["polo-news-researcher"];
+      eventVersion?: number;
+      recentFamilies?: string[];
+    },
   ): Promise<Asset[]>;
 }
 export interface VideoProvider {

@@ -91,7 +91,11 @@ export class SkillRunner {
       "utf8",
     );
     // UTF-8 byte count is an upper reservation, not a claim of observed model usage.
-    const inputTokenUpperBound = wireBytes + 2048;
+    const imageReserve = (prepared.visualAssets ?? []).reduce(
+      (sum, image) => sum + image.byteLength + 16384,
+      0,
+    );
+    const inputTokenUpperBound = wireBytes + 2048 + imageReserve;
     const estimatedInputTokens = Math.ceil(wireBytes / 3.2) + 128;
     const workflowId =
       input.workflowId ??
@@ -164,6 +168,9 @@ export class SkillRunner {
       contextBytes: wireBytes,
       estimatedInputTokens,
       inputTokenUpperBound,
+      imageCount: prepared.visualAssets?.length ?? 0,
+      imageInputReservation: imageReserve,
+      imageTokenEstimate: null,
       maxOutputTokens,
       inputHash,
       cacheHit,

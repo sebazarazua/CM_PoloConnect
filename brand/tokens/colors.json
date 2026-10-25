@@ -1,0 +1,28 @@
+{
+  "version": "1",
+  "method": "opaque pixels, RGB bins of 16, nearest dense sampled cluster to owner anchors; neutrals/status explicitly designed",
+  "tokens": {
+    "brand.navy": "#070d25",
+    "brand.darkBlue": "#12223c",
+    "brand.blue": "#2d5377",
+    "brand.brightBlue": "#247ce6",
+    "brand.white": "#ffffff",
+    "surface.dark": "#070d25",
+    "surface.light": "#f5f7f9",
+    "surface.elevated": "#12223c",
+    "text.primaryDark": "#070d25",
+    "text.primaryLight": "#ffffff",
+    "text.secondary": "#b7c9d9",
+    "accent.primary": "#247ce6",
+    "accent.secondary": "#2a83bb",
+    "status.live": "#cf3245",
+    "status.result": "#247ce6",
+    "status.breaking": "#cf3245"
+  },
+  "gradients": {
+    "brandDepth": [
+      "brand.navy",
+      "brand.blue"
+    ]
+  }
+}

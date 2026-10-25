@@ -23,6 +23,12 @@ export default ts.config(
     },
   },
   {
+    files: ["src/render/browser-qa.js"],
+    languageOptions: {
+      globals: { document: "readonly", getComputedStyle: "readonly" },
+    },
+  },
+  {
     files: ["**/*.mjs"],
     languageOptions: { globals: { process: "readonly", console: "readonly" } },
   },

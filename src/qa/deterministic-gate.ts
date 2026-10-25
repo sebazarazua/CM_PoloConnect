@@ -11,6 +11,7 @@ import { assertRights } from "../domain/guards.js";
 import { validApproval } from "../approvals/service.js";
 import { hash } from "../common/core.js";
 import type { OutputValidator } from "../skills/runtime.js";
+import { finalRenderInputs } from "../render/visual-input.js";
 
 export interface GateIssue {
   code: string;
@@ -43,6 +44,18 @@ export class DeterministicQualityGate {
       surface: string,
       detail: string,
     ) => issues.push({ code, owner, surface, detail });
+    try {
+      finalRenderInputs(current(c.assets)?.data ?? []);
+    } catch (error) {
+      fail(
+        "render_integrity",
+        "renderer_editor",
+        "final_render",
+        error instanceof Error
+          ? error.message
+          : "Final render verification failed",
+      );
+    }
     if (c.eventId !== event.event_id)
       fail(
         "event_id_mismatch",

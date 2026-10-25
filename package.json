@@ -38,13 +38,22 @@
     "cm:benchmark": "tsx src/cli.ts benchmark",
     "test:governance": "vitest run tests/ai-governance.test.ts tests/openai.test.ts",
     "doctor": "node scripts/doctor.mjs",
-    "python": "node scripts/python.mjs"
+    "python": "node scripts/python.mjs",
+    "brand:build": "tsx scripts/build-brand.ts",
+    "render:install": "playwright install chromium --only-shell",
+    "cm:render-demo": "tsx scripts/render.ts",
+    "cm:gallery": "tsx scripts/render.ts --gallery",
+    "cm:render": "tsx scripts/render.ts",
+    "test:render": "vitest run tests/render.test.ts tests/visual-review.test.ts",
+    "cm:reference-import": "tsx scripts/reference-import.ts"
   },
   "dependencies": {
     "@prisma/client": "6.19.3",
     "ajv": "8.20.0",
     "ajv-formats": "3.0.1",
-    "openai": "7.43.0"
+    "openai": "7.43.0",
+    "playwright": "1.64.1",
+    "sharp": "0.35.5"
   },
   "devDependencies": {
     "@eslint/js": "9.39.1",

@@ -63,6 +63,7 @@ export interface ExecutionReceipt {
   model: string | null;
 }
 export interface PreparedContext {
+  visualAssets?: import("../render/visual-input.js").VisualInput[];
   skillCore: string;
   relevantReferences: Record<string, string>;
   taskContext: unknown;
@@ -94,6 +95,9 @@ export interface ExecutionPlan {
   contextBytes: number;
   estimatedInputTokens: number;
   inputTokenUpperBound: number;
+  imageCount: number;
+  imageInputReservation: number;
+  imageTokenEstimate: null;
   maxOutputTokens: number;
   inputHash: string;
   cacheHit: boolean;

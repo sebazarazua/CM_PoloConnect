@@ -102,7 +102,7 @@ async function main(): Promise<void> {
   if (command === "context-preview") {
     const planner: SkillExecutor = {
       name: "openai-responses",
-      version: "1",
+      version: "2",
       model: null,
       usesLLM: true,
       provider: "openai",

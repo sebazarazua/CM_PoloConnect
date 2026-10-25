@@ -1,0 +1,14 @@
+{
+  "eventId": "owner-verified-demo-1",
+  "eventVersion": 1,
+  "verified": true,
+  "verifiedBy": "Operador de prueba / datos ficticios",
+  "source": "https://official.example.invalid/owner-verified-demo-1",
+  "simulated": true,
+  "home": "Team Azul",
+  "away": "Team Blanco",
+  "homeScore": 12,
+  "awayScore": 10,
+  "tournament": "Torneo Demo",
+  "stage": "FINAL"
+}

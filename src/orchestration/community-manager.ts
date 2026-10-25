@@ -1,4 +1,5 @@
 import { CMError, ensure, hash, id, now, redact } from "../common/core.js";
+import { finalRenderInputs } from "../render/visual-input.js";
 import { editorial, loadConfig, type Config } from "../config/index.js";
 import {
   approve,
@@ -721,7 +722,22 @@ export class CommunityManagerOrchestrator {
           ? await this.providers.video.getRender(
               (await this.providers.video.requestCut(plan, sources)).jobId,
             )
-          : await this.providers.design.render(plan, sources);
+          : await this.providers.design.render(plan, sources, {
+              event: event.data,
+              eventVersion: event.revision,
+              recentFamilies: Object.values(s.contents)
+                .filter((item) => item.id !== c.id)
+                .sort((a, b) => a.createdAt.localeCompare(b.createdAt))
+                .flatMap(
+                  (item) =>
+                    current(item.assets)
+                      ?.data.filter((a) => a.stage === "rendered")
+                      .map((a) => String(a.metadata.compositionFamily ?? "")) ??
+                    [],
+                )
+                .filter(Boolean)
+                .slice(-4),
+            });
         if (!rendered.length)
           return this.block(
             s,
@@ -785,6 +801,17 @@ export class CommunityManagerOrchestrator {
   async runQualityReview(contentId: string): Promise<ContentItem> {
     return this.tx(async (s) => {
       const c = this.item(s, contentId);
+      try {
+        finalRenderInputs(current(c.assets)?.data ?? []);
+      } catch (error) {
+        return this.block(
+          s,
+          c,
+          "render_integrity",
+          error instanceof Error ? error.message : "Final render changed",
+          "renderer_editor",
+        );
+      }
       const qaInput = previewInput(s, c, "quality-reviewer", this.runner),
         expectedReview = this.runner.preview(
           s,
