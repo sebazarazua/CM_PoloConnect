@@ -1,0 +1,107 @@
+{
+  "benchmark-researcher": {
+    "core": [
+      "benchmark-pool.md",
+      "analysis-framework.md",
+      "evidence-and-metrics.md",
+      "transfer-and-originality.md"
+    ],
+    "platform": ["platform-state-2026.md"]
+  },
+  "polo-news-researcher": {
+    "core": [
+      "verification-protocol.md",
+      "entity-and-time-resolution.md",
+      "source-strategy.md"
+    ],
+    "priority": ["editorial-prioritization.md"],
+    "rights": ["rights-and-attribution.md"],
+    "external_sources": ["source-registry-2026.md"]
+  },
+  "content-opportunity-detector": {
+    "core": [
+      "decision-framework.md",
+      "asset-readiness.md",
+      "handoff-contract.md",
+      "editorial-fatigue-and-diversity.md"
+    ],
+    "timing": ["timing-and-lifecycle.md"],
+    "premium": ["opportunity-types.md"]
+  },
+  "editorial-strategist": {
+    "core": [
+      "strategy-model.md",
+      "objectives-and-measurement.md",
+      "calendar-governance.md",
+      "human-quality-and-brand-integrity.md"
+    ],
+    "feedback": ["performance-feedback-loop.md"],
+    "campaign": ["campaign-and-tournament-planning.md"],
+    "series": ["content-pillars-and-series.md"],
+    "platform": ["platform-state-2026.md"]
+  },
+  "reel-planner": {
+    "core": [
+      "footage-selection.md",
+      "audio-and-rights.md",
+      "hooks-and-retention.md",
+      "reel-story-architecture.md",
+      "editor-handoff.md"
+    ],
+    "cover": ["cover-and-packaging.md"],
+    "subtitles": ["text-subtitles-and-accessibility.md"],
+    "platform": ["platform-output-2026.md"]
+  },
+  "social-designer": {
+    "core": [
+      "design-system-and-identity.md",
+      "layout-and-hierarchy.md",
+      "accessibility-and-readability.md",
+      "render-handoff.md"
+    ],
+    "photo": ["photo-treatment-and-authenticity.md"],
+    "carousel": ["carousel-architecture.md"],
+    "data": ["sports-data-visualization.md"],
+    "templates": ["templates-and-variation.md"],
+    "platform": ["platform-output-2026.md"]
+  },
+  "copywriter": {
+    "core": [
+      "voice-and-tone.md",
+      "anti-ai-language.md",
+      "caption-architecture.md",
+      "polo-language-and-factual-discipline.md",
+      "copy-qa.md"
+    ],
+    "overlays": ["headlines-and-overlays.md"],
+    "cta": ["cta-hashtags-and-mentions.md"],
+    "multi_surface": ["platform-adaptation.md"]
+  },
+  "quality-reviewer": {
+    "core": [
+      "review-protocol.md",
+      "severity-and-routing.md",
+      "copy-and-editorial-qa.md",
+      "visual-and-authenticity-qa.md"
+    ],
+    "factual": ["factual-consistency.md"],
+    "rights": ["rights-sponsor-and-compliance.md"],
+    "approval": ["approval-and-correction-loop.md"],
+    "platform": [
+      "accessibility-and-platform-preflight.md",
+      "platform-preflight-2026.md"
+    ]
+  },
+  "performance-analyst": {
+    "core": [
+      "measurement-framework.md",
+      "metric-dictionary-and-data-quality.md",
+      "diagnosis-and-causal-discipline.md",
+      "learning-system.md",
+      "strategic-handoffs.md"
+    ],
+    "baseline": ["baselines-and-normalization.md"],
+    "experiment": ["experiment-analysis.md"],
+    "platform": ["platform-metrics-2026.md"]
+  }
+}

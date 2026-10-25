@@ -1,0 +1,6 @@
+{
+  "version": "unconfigured",
+  "currency": "USD",
+  "models": {},
+  "notes": "Agregar precios verificados por millón de tokens para cada modelo habilitado: input, cachedInput, output. No se inventan precios. Con maxCostUsd configurado y sin precio verificable, se bloquea antes de llamar."
+}

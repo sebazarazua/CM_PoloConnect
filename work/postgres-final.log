@@ -1,5 +1,0 @@
-
-> polo-connect-community-manager@0.1.0 test:postgres
-> tsx scripts/test-postgres.ts
-
-{"postgres":"passed","migration":"passed","fullPipeline":"passed","relationalProjections":"passed","concurrency":"passed","restart":"passed","publishing":"mock_only"}

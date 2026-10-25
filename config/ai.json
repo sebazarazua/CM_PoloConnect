@@ -1,0 +1,49 @@
+{
+  "version": "1",
+  "timeoutMs": 60000,
+  "classes": {
+    "FAST": {
+      "maxCalls": 5,
+      "maxInputTokens": 120000,
+      "maxOutputTokens": 20000,
+      "maxCostUsd": 0.5
+    },
+    "STANDARD": {
+      "maxCalls": 10,
+      "maxInputTokens": 240000,
+      "maxOutputTokens": 40000,
+      "maxCostUsd": 2
+    },
+    "PREMIUM": {
+      "maxCalls": 20,
+      "maxInputTokens": 480000,
+      "maxOutputTokens": 80000,
+      "maxCostUsd": 8
+    }
+  },
+  "perSkill": {
+    "default": { "maxInputTokens": 50000, "maxOutputTokens": 4096 },
+    "editorial-strategist": {
+      "modelProfile": "PREMIUM",
+      "maxOutputTokens": 8192
+    },
+    "benchmark-researcher": {
+      "modelProfile": "PREMIUM",
+      "maxOutputTokens": 6144
+    },
+    "performance-analyst": {
+      "modelProfile": "STANDARD",
+      "maxOutputTokens": 6144
+    },
+    "copywriter": { "modelProfile": "STANDARD" },
+    "quality-reviewer": { "modelProfile": "STANDARD" }
+  },
+  "context": {
+    "recentDays": 7,
+    "maxRecent": 20,
+    "maxLearnings": 5,
+    "maxBenchmarks": 5
+  },
+  "benchmarkTtlHours": 168,
+  "strategyTtlHours": 168
+}
