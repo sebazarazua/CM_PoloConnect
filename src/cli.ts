@@ -9,8 +9,7 @@ import { PrismaRepository } from "./persistence/prisma-repository.js";
 import { mockProviders } from "./providers/mock/index.js";
 import type { ContentItem } from "./domain/models.js";
 import { loadConfig } from "./config/index.js";
-import { loadAISettings } from "./ai/config.js";
-import { OpenAIResponsesSkillExecutor } from "./ai/openai-executor.js";
+import { selectedAISettings, selectedExecutor } from "./ai/factory.js";
 import { usageReport } from "./ai/usage.js";
 import { UsageJournal } from "./ai/journal.js";
 import { nextSkill, previewInput } from "./ai/preview.js";
@@ -70,11 +69,15 @@ function summary(c: ContentItem) {
 }
 
 async function main(): Promise<void> {
-  const ai = loadAISettings();
+  const ai = selectedAISettings();
   if (command === "ai-check") {
     print({
       real_ai_enabled: ai.enabled,
-      api_key_configured: !!process.env.OPENAI_API_KEY?.trim(),
+      provider: process.env.AI_PROVIDER || "gemini",
+      api_key_configured:
+        (process.env.AI_PROVIDER || "gemini") === "openai"
+          ? !!process.env.OPENAI_API_KEY?.trim()
+          : !!(process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY),
       mock_mode_available: true,
       models: ai.models,
       pricingConfigured: Object.keys(ai.pricing.models).length > 0,
@@ -87,25 +90,29 @@ async function main(): Promise<void> {
     const state = await repository.read();
     print({
       ...usageReport(state, values.id),
-      writeAheadJournal: new UsageJournal()
-        .rows()
-        .map((r) => ({
-          id: r.id,
-          workflowId: r.workflowId,
-          phase: r.phase,
-          usage: r.usage ?? null,
-          reservedForBudget: r.budgetCharge,
-        })),
+      writeAheadJournal: new UsageJournal().rows().map((r) => ({
+        id: r.id,
+        workflowId: r.workflowId,
+        phase: r.phase,
+        usage: r.usage ?? null,
+        reservedForBudget: r.budgetCharge,
+      })),
     });
     return;
   }
   if (command === "context-preview") {
     const planner: SkillExecutor = {
-      name: "openai-responses",
-      version: "2",
+      name:
+        (process.env.AI_PROVIDER || "gemini") === "openai"
+          ? "openai-responses"
+          : "gemini-genai",
+      version: (process.env.AI_PROVIDER || "gemini") === "openai" ? "2" : "1",
       model: null,
       usesLLM: true,
-      provider: "openai",
+      provider:
+        (process.env.AI_PROVIDER || "gemini") === "openai"
+          ? "openai"
+          : "gemini",
       execute: async () => {
         throw new CMError("permanent_error", "Preview cannot execute a model");
       },
@@ -170,7 +177,7 @@ async function main(): Promise<void> {
     const live = new CommunityManagerOrchestrator(
       repository,
       mockProviders(),
-      new OpenAIResponsesSkillExecutor(ai),
+      selectedExecutor(ai),
       loadConfig(),
       ai,
     );

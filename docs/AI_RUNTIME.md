@@ -1,8 +1,10 @@
 # Runtime IA y presupuestos
 
+Proveedor predeterminado actual: **Gemini**, mediante `src/ai/factory.ts` y el SDK oficial `@google/genai`. `GEMINI_API_KEY`, `GEMINI_MODEL_*`, `config/ai.gemini.json` y su tabla de precios con vencimiento están listos en `.env.example`. OpenAI conserva la alternativa `AI_PROVIDER=openai`. La habilitación `ENABLE_REAL_AI=true` sigue siendo explícita. [Configuración de Gemini y automatización](AUTOMATION.md).
+
 ## Routing
 
-`classify()` asigna FAST a resultados/fixture/live/replay estructurados, STANDARD a Reel/carrusel/noticias y PREMIUM a campañas/entrevistas/reportes especiales explícitos. No hay upgrade automático. Los perfiles de modelo se configuran con `MODEL_FAST`, `MODEL_STANDARD`, `MODEL_PREMIUM`; copy/QA usan STANDARD por default incluso en un workflow FAST. La lógica de negocio no contiene IDs concretos de modelos.
+`classify()` asigna FAST a resultados/fixture/live/replay estructurados, STANDARD a Reel/carrusel/noticias y PREMIUM a campañas/entrevistas/reportes especiales explícitos. No hay upgrade automático. Los perfiles se configuran con `GEMINI_MODEL_FAST`, `GEMINI_MODEL_STANDARD`, `GEMINI_MODEL_PREMIUM` o `MODEL_*` en la alternativa OpenAI; copy/QA usan STANDARD por default incluso en un workflow FAST. Los defaults del proveedor están centralizados en la factory, fuera del orquestador editorial.
 
 La ingesta deduplica antes del runner por clave lógica, event ID, URLs normalizadas y fingerprint material. Un reporte nuevo sin verificar requiere news researcher; un import verificado exige actor identificado, ledger y ambos validadores. Una URL repetida no constituye corroboración independiente. AI demo importa evidencia declaradamente ficticia y no paga una investigación para redescubrirla.
 
@@ -38,10 +40,10 @@ Se utiliza el SDK oficial `openai@7.43.0`, `responses.create()`, `text.format` c
 
 OpenAI exige objetos cerrados y todos los campos requeridos; los schemas originales son más flexibles. `structured-output.ts` usa un codec de transporte: opcionales con null y lista `__omitted`, extensiones/diccionarios con entradas key/value_json, valores JSON abiertos con json_value. Se conservan distinciones entre null y ausencia y se rechaza omitir campos requeridos o sobreescribir propiedades. Nueve pruebas de round-trip validan que los outputs originales se recuperan sin pérdida; el resultado decodificado debe pasar Ajv y el validador Python original.
 
-No se ofrece tool de investigación, publicación, aprobación ni render externo. El endpoint SDK está fijado a OpenAI oficial y el logging del SDK está apagado. Errores guardados contienen categoría/HTTP status, sin body, headers ni API key. La redacción de secretos distingue métricas como `inputTokens` de credenciales como `access_token`.
+No se ofrece tool de investigación, publicación, aprobación ni render externo. Los endpoints SDK están fijados al proveedor oficial seleccionado. Errores guardados contienen categoría/HTTP status, sin body, headers ni API key. La redacción de secretos distingue métricas como `inputTokens` de credenciales como `access_token`.
 
 El gate determinístico comprueba datos verificables antes de QA IA. El LLM juzga lenguaje, coherencia, originalidad y narrativa de lo disponible. Sin media real no se declara inspección de píxeles ni QA visual completo. Aprobación/publicación siguen bloqueadas cuando faltan assets o validaciones, incluso si el modelo dice que está listo.
 
 ## Alcance actual
 
-Una instancia local / workspace editorial serializado. Para un deployment con múltiples hosts, el journal debe trasladarse a una reserva transaccional compartida y reconciliable en PostgreSQL antes de habilitar workers distribuidos. No hay servidor público ni autenticación multiusuario: el actor CLI se declara localmente. No hay publicación real, fetching, rendering externo ni autoaprobación. El modelo no determina esas capacidades.
+Una instancia / workspace editorial serializado. Para un deployment con múltiples hosts, el journal debe trasladarse a una reserva transaccional compartida y reconciliable en PostgreSQL antes de habilitar workers distribuidos. No hay servidor público ni autenticación multiusuario: el actor CLI se declara localmente. La integración Instagram y el Cron usan las habilitaciones de [AUTOMATION.md](AUTOMATION.md). La autoridad de publicación corresponde al código/política o al humano, nunca al modelo.

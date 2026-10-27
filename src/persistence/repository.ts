@@ -95,6 +95,12 @@ export class FileRepository implements EditorialRepository {
     try {
       const tx = await applyTransaction(await this.read(), action);
       await writeFile(temp, JSON.stringify(redact(tx.next), null, 2), "utf8");
+      const durable = await open(temp, "r+");
+      try {
+        await durable.sync();
+      } finally {
+        await durable.close();
+      }
       await rename(temp, this.path);
       if (tx.error) throw tx.error;
       return structuredClone(tx.result) as T;

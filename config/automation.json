@@ -1,0 +1,15 @@
+{
+  "timezone": "America/Argentina/Buenos_Aires",
+  "windows": [
+    { "days": [0, 1, 2, 3, 4, 5, 6], "start": "09:00", "end": "22:00" }
+  ],
+  "allowedEventTypes": ["match_result"],
+  "bypassWindowEventTypes": ["match_result"],
+  "maxPosts24Hours": 4,
+  "minGapMinutes": 60,
+  "maxPerCycle": 1,
+  "maxCandidates": 2,
+  "maxLlmCallsPerCycle": 8,
+  "maxCostUsdPerCycle": 2,
+  "leaseMinutes": 30
+}

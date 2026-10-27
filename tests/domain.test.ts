@@ -34,8 +34,11 @@ describe("domain guards, contracts, execution and retries", () => {
   it("all dangerous flags are false and enabling any fails closed", () => {
     const c = loadConfig({});
     expect(Object.values(c.flags).every((x) => x === false)).toBe(true);
-    for (const flag of dangerousFlags)
+    for (const flag of dangerousFlags.filter(
+      (f) => f !== "ENABLE_REAL_PUBLISHING",
+    ))
       expect(() => loadConfig({ [flag]: "true" })).toThrow(flag);
+    expect(loadConfig({ ENABLE_REAL_PUBLISHING: "true" }).mode).toBe("mock");
     expect(() => loadConfig({ MAX_SKILL_RETRIES: "1000" })).toThrow();
   });
   it("hashes object keys deterministically; redacts nested secrets", () => {

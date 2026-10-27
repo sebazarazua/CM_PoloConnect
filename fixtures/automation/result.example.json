@@ -1,0 +1,74 @@
+{
+  "id": "manual-result-example",
+  "logicalKey": "demo:tournament-1:match-1:2026-10-24",
+  "event": {
+    "event_id": "demo-match-1",
+    "event_type": "match_result",
+    "headline_working": "Team Azul 12-10 Team Blanco",
+    "entities": [
+      {
+        "type": "team",
+        "canonical_name": "Team Azul"
+      },
+      {
+        "type": "team",
+        "canonical_name": "Team Blanco"
+      },
+      {
+        "type": "tournament",
+        "canonical_name": "Torneo Demo"
+      }
+    ],
+    "time": {
+      "event_started_at": "2026-10-24T18:00:00-03:00"
+    },
+    "claims": [
+      {
+        "claim": "Team Azul venció a Team Blanco por 12-10",
+        "status": "confirmed_primary",
+        "confidence": "high",
+        "source_ids": ["demo-official"]
+      }
+    ],
+    "sources": [
+      {
+        "source_id": "demo-official",
+        "url": "https://official.example.invalid/demo-match-1",
+        "role": "primary_official",
+        "publisher": "Organizador ficticio",
+        "observed_at": "2026-10-24T20:00:00-03:00",
+        "original_reporting": true
+      }
+    ],
+    "editorial": {
+      "action_state": "publish_now",
+      "urgency": "same_day",
+      "editorial_score": 80,
+      "why_it_matters": "Relevant result"
+    },
+    "rights": {
+      "media_status": "owned"
+    },
+    "observed_at": "2026-10-24T20:00:00-03:00",
+    "simulated": true,
+    "render_facts": {
+      "score": {
+        "home": "Team Azul",
+        "away": "Team Blanco",
+        "homeScore": 12,
+        "awayScore": 10
+      },
+      "tournament": "Torneo Demo",
+      "stage": "FINAL"
+    }
+  },
+  "assets": [],
+  "verifiedBy": "REEMPLAZAR_POR_EDITOR",
+  "consent": {
+    "risk": "routine",
+    "allowAutomatic": false
+  },
+  "timing": {
+    "mode": "publish_now"
+  }
+}

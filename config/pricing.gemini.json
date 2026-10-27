@@ -1,0 +1,10 @@
+{
+  "version": "google-standard-2026-10-25",
+  "currency": "USD",
+  "validUntil": "2026-12-31T23:59:59Z",
+  "models": {
+    "gemini-3.8-flash": { "input": 0.75, "cachedInput": 0.075, "output": 3.75 }
+  },
+  "source": "https://ai.google.dev/gemini-api/docs/pricing#gemini-3.8-flash",
+  "notes": "Standard paid tier, per million tokens; output includes thinking. These promotional prices expire after 2026-12-31. Model overrides require a corresponding verified entry. No Google Search, Maps, code tools, explicit caching or batch requests are enabled. Free-tier usage is budgeted conservatively at paid-tier prices."
+}

@@ -26,6 +26,7 @@ const transitions: Record<Status, readonly Status[]> = {
   ],
   qa_failed: ["researching", "planning", "ready_for_qa", "blocked", "archived"],
   ready_for_human_approval: [
+    "ready_to_publish",
     "human_approved",
     "human_rejected",
     "planning",

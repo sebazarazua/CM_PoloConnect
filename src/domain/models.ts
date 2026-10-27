@@ -97,15 +97,16 @@ export interface Approval {
 }
 export interface Publication {
   id: string;
-  provider: "mock";
+  provider: "mock" | "instagram";
   idempotencyKey: string;
   scheduledAt: string | null;
   publishedAt: string | null;
   externalId: string | null;
-  status: "pending" | "scheduled" | "published" | "cancelled" | "failed";
+  status: "pending" | "scheduled" | "published" | "cancelled" | "failed" | "processing" | "publishing" | "unknown";
   versions: Versions;
   packageHash: string;
   payload: PublishPackage;
+  instagram?: import("../integrations/instagram/publication-package.js").InstagramPublicationRecord;
 }
 export interface PublishPackage {
   contentId: string;
@@ -115,7 +116,7 @@ export interface PublishPackage {
   copy: SocialCopy;
   assets: Asset[];
   metadata: Record<string, unknown>;
-  simulated: true;
+  simulated: boolean;
 }
 export interface PerformanceSnapshot {
   id: string;
@@ -212,6 +213,7 @@ export interface AuditEvent {
   detail: unknown;
 }
 export interface Store {
+  automation?: import("../automation/types.js").AutomationState;
   budgetReservations?: Array<{
     id: string;
     workflowId: string;

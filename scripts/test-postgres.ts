@@ -10,6 +10,10 @@ import { PrismaRepository } from "../src/persistence/prisma-repository.js";
 import { mockProviders } from "../src/providers/mock/index.js";
 import { packageHash } from "../src/approvals/service.js";
 import { ensure, redact } from "../src/common/core.js";
+import {
+  FixtureContentSource,
+  ManualQueueContentSource,
+} from "../src/automation/sources.js";
 
 const server = createServer();
 await new Promise<void>((done) => server.listen(0, "127.0.0.1", done));
@@ -34,12 +38,19 @@ class TestPostgres extends EmbeddedPostgres {
   override async stop(): Promise<void> {
     if (process.platform !== "win32") return super.stop();
     const packageName = "@embedded-postgres/windows-x64";
-    const binaries = await import(packageName) as { pg_ctl: string };
+    const binaries = (await import(packageName)) as { pg_ctl: string };
     if (existsSync(resolve(databaseDir, "postmaster.pid"))) {
-      const stopped = spawnSync(binaries.pg_ctl, ["-D", databaseDir, "stop", "-m", "fast", "-w", "-t", "20"], { windowsHide: true, timeout: 25000 });
+      const stopped = spawnSync(
+        binaries.pg_ctl,
+        ["-D", databaseDir, "stop", "-m", "fast", "-w", "-t", "20"],
+        { windowsHide: true, timeout: 25000 },
+      );
       ensure(stopped.status === 0, "Temporary PostgreSQL shutdown failed");
     }
-    ensure(!relative(resolve(".postgres"), databaseDir).startsWith(".."), "Unsafe test cleanup path");
+    ensure(
+      !relative(resolve(".postgres"), databaseDir).startsWith(".."),
+      "Unsafe test cleanup path",
+    );
     rmSync(databaseDir, { recursive: true, force: true });
   }
 }
@@ -116,6 +127,102 @@ try {
     (await repository.read()).revision === before + 3,
     "Concurrent transactions lost writes",
   );
+  // Storage-only Instagram receipt fixture: no provider/network/publication is invoked.
+  await repository.transaction(async (s) => {
+    const item = s.contents[c.id]!,
+      receipt = structuredClone(item.publications[0]!);
+    receipt.id = "postgres-instagram-storage-fixture";
+    receipt.provider = "instagram";
+    receipt.idempotencyKey = "postgres-instagram-storage-fixture-key";
+    receipt.externalId = "900";
+    receipt.instagram = {
+      accountId: "123",
+      containerId: "800",
+      igMediaId: "900",
+      permalink: "https://www.instagram.com/p/storage-fixture/",
+      captionVersion: item.versions.copy,
+      assetVersion: item.versions.asset,
+      phase: "published",
+      createdAt: item.createdAt,
+      updatedAt: item.updatedAt,
+      publicationPackage: {
+        schemaVersion: 1,
+        contentId: item.id,
+        platform: "instagram",
+        accountId: "123",
+        surface: "feed",
+        versions: { ...item.versions },
+        approvalId: item.approvals.at(-1)!.id,
+        editorialPackageHash: receipt.packageHash,
+        caption: "Storage fixture; not posted",
+        assetId: "storage-fixture",
+        finalAsset: {
+          path: "fixture://not-published.jpg",
+          sha256: "storage-fixture",
+          sourceSha256: "storage-fixture",
+          mimeType: "image/jpeg",
+          width: 1080,
+          height: 1350,
+          byteLength: 0,
+        },
+        rights: [],
+        deterministicQA: {
+          passed: true,
+          issues: [],
+          checks: [],
+          sourceOfTruthHash: "storage-fixture",
+        },
+        aiQA: {
+          reviewId: "storage-fixture",
+          reviewHash: "storage-fixture",
+          runId: "storage-fixture",
+          provider: "fixture",
+          model: null,
+        },
+        packageHash: "storage-fixture-package-hash",
+      },
+    };
+    item.publications.push(receipt);
+  });
+  const instagramReceipt = await db.publication.findUnique({
+    where: { id: "postgres-instagram-storage-fixture" },
+  });
+  ensure(
+    instagramReceipt?.igMediaId === "900" &&
+      instagramReceipt.containerId === "800" &&
+      instagramReceipt.accountId === "123" &&
+      instagramReceipt.publicationPackageHash ===
+        "storage-fixture-package-hash" &&
+      instagramReceipt.captionVersion === c.versions.copy,
+    "Instagram relational projection missing",
+  );
+  const queueCandidate = (await new FixtureContentSource().discover())[0]!;
+  await new ManualQueueContentSource(repository).enqueue(queueCandidate);
+  await repository.transaction(async (s) => {
+    s.automation!.cycles.push({
+      id: "postgres-cycle-storage-fixture",
+      startedAt: new Date().toISOString(),
+      endedAt: new Date().toISOString(),
+      mode: "supervised",
+      dryRun: true,
+      simulated: true,
+      status: "completed",
+      counters: {
+        discovered: 1,
+        generated: 0,
+        skipped: 1,
+        duplicate: 0,
+        held: 0,
+        approval_required: 0,
+        auto_approved_by_policy: 0,
+        published: 0,
+        failed: 0,
+      },
+      entries: [],
+      llmCalls: 0,
+      costUsd: 0,
+    });
+  });
   await repository.close();
   repository = undefined;
   const restored = new PrismaRepository(
@@ -124,6 +231,22 @@ try {
   ensure(
     (await restored.read()).contents[c.id]?.status === "analyzed",
     "Restart persistence failed",
+  );
+  ensure(
+    (await restored.read()).contents[c.id]?.publications.some(
+      (p) => p.instagram?.igMediaId === "900",
+    ),
+    "Instagram receipt restart persistence failed",
+  );
+  ensure(
+    (await new ManualQueueContentSource(restored).discover()).length === 1,
+    "Automation queue restart persistence failed",
+  );
+  ensure(
+    (await restored.read()).automation?.cycles.some(
+      (cycle) => cycle.id === "postgres-cycle-storage-fixture",
+    ),
+    "Automation cycle restart persistence failed",
   );
   await restored.close();
   console.log(
@@ -134,7 +257,9 @@ try {
       relationalProjections: "passed",
       concurrency: "passed",
       restart: "passed",
-      publishing: "mock_only",
+      instagramReceiptProjection: "passed",
+      automationQueueAndCyclesRestart: "passed",
+      publishing: "mock_and_storage_fixtures_only",
     }),
   );
 } catch (e) {

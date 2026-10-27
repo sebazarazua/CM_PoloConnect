@@ -21,7 +21,11 @@ export interface JournalRow {
 }
 /** Write-ahead accounting survives a process crash or domain transaction rollback. No prompts/secrets. */
 export class UsageJournal {
-  constructor(private path = resolve(".local/ai-usage.jsonl")) {}
+  constructor(
+    private path = resolve(
+      process.env.AI_USAGE_JOURNAL_FILE || ".local/ai-usage.jsonl",
+    ),
+  ) {}
   rows(): JournalRow[] {
     if (!existsSync(this.path)) return [];
     try {

@@ -17,6 +17,12 @@ export interface ModelPrice {
   output: number;
 }
 export interface AISettings {
+  automationScope?: {
+    startedAt: string;
+    maxCalls: number;
+    maxCostUsd: number;
+    signal?: AbortSignal;
+  };
   enabled: boolean;
   models: Record<WorkflowClass, string | null>;
   version: string;

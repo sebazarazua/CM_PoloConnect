@@ -2,6 +2,16 @@
 
 Proyecto de desarrollo en la raíz Git. TypeScript/Node, Prisma/PostgreSQL, repositorio de archivos, nueve Skills independientes, contratos JSON Schema/Ajv, validadores Python, estado explícito, versionado, QA, aprobación humana y trazabilidad.
 
+## Automatización con Gemini
+
+Gemini es el proveedor predeterminado. Completar `GEMINI_API_KEY` en `.env` y habilitar `ENABLE_REAL_AI=true`; `.env.example` incluye modelos, precios y todas las variables. `npm.cmd run cm:gemini:check` verifica configuración sin gastar tokens. OpenAI queda como alternativa explícita.
+
+`npm.cmd run cm:auto-cycle` procesa la cola hasta QA/política/publicación y termina. Default **supervised + dry run**, publicación desactivada. `cm:queue:add` ingresa eventos y `cm:auto-status` muestra ciclos/recibos. [Configuración completa, pruebas A/B/C y Railway Cron](docs/AUTOMATION.md). La publicación automática real requiere modo automatic, ambos switches, dry run false, consentimiento del input y política vigente. Se empieza con resultados confirmados y una imagen feed.
+
+## Instagram manual real
+
+Implementado para una imagen feed con Instagram Login oficial, OAuth local HTTPS, vault cifrado, S3 privado con URL firmada, QA/aprobación por versión y recibos idempotentes en archivo o Prisma. [Configuración de Meta, Redirect URI exacto y comandos](docs/INSTAGRAM_PUBLISHING.md). Real publishing sigue desactivado por defecto; `cm:publish-real` y `cm:instagram:test-publish` inician el flujo manual. `verify` nunca publica en Meta.
+
 ## Sistema visual local
 
 Los originales aportados están registrados sin alteraciones. El isotipo transparente normalizado es la firma de producción; el horizontal queda como referencia. Hay un pack de siete variantes, tokens de acabado, modos study/production, tipografía editorial Barlow, 32 variantes de composición, RenderSpec cerrado y renderer HTML/CSS + Chromium. Exporta PNG/JPG reales, con comprobaciones de derechos, score, contraste, overflow, aspect ratio y safe areas. Los mocks anteriores se conservan.
@@ -39,7 +49,7 @@ Para crear el venv en otro equipo: `py -3 -m venv .venv` o `python -m venv .venv
 npm.cmd run cm:demo
 ```
 
-Costo IA: **0 USD**. Se detiene en `ready_for_human_approval` / `pending_approval`. Fuentes, renders y analytics son ficticios. Ninguna integración social real está implementada.
+Costo IA: **0 USD**. Se detiene en `ready_for_human_approval` / `pending_approval`. Fuentes, renders y analytics de este comando son ficticios. La integración Instagram real tiene comandos separados.
 
 El recorrido completo necesita una autorización CLI explícita, limitada al fixture:
 
@@ -64,14 +74,14 @@ npm.cmd run cm:ai-demo
 npm.cmd run cm:usage
 ```
 
-`cm:ai-demo` usa Responses con el SDK oficial OpenAI, evento ficticio **ya verificado**, estrategia persistida y assets/renders mock. Sólo ejecuta las decisiones necesarias: oportunidad → diseño → copy → QA. No invoca research, benchmark, estrategia ni performance por publicación. No aprueba ni publica. Se guarda en `.local/ai-demo.json`; un segundo recorrido idéntico reutiliza dependencias/cache y conserva un ledger acumulado.
+`cm:ai-demo` usa el proveedor seleccionado (Gemini predeterminado), evento ficticio **ya verificado**, estrategia persistida y assets/renders mock. Sólo ejecuta las decisiones necesarias: oportunidad → diseño → copy → QA. No invoca research, benchmark, estrategia ni performance por publicación. No aprueba ni publica. Se guarda en `.local/ai-demo.json`; un segundo recorrido idéntico reutiliza dependencias/cache y conserva un ledger acumulado. Para píxeles reales usar el flujo nuevo documentado en `AUTOMATION.md`.
 
 Para habilitarlo:
 
 1. Copiar `.env.example` a `.env`.
-2. Definir `ENABLE_REAL_AI=true`, `OPENAI_API_KEY` y modelos disponibles en tu cuenta en `MODEL_FAST`, `MODEL_STANDARD` y `MODEL_PREMIUM`.
-3. En `config/pricing.json`, agregar para cada modelo sus precios **verificados** por millón de tokens en `input`, `cachedInput`, `output`; actualizar `version`. Ver la [tabla oficial de precios](https://developers.openai.com/api/docs/pricing). Los precios empiezan vacíos deliberadamente.
-4. Mantener publicación, autoaprobación, rendering externo y fetching en `false`.
+2. Definir `ENABLE_REAL_AI=true`, `AI_PROVIDER=gemini`, `GEMINI_API_KEY` y los modelos `GEMINI_MODEL_*` del ejemplo.
+3. El perfil `config/ai.gemini.json` y la tabla verificada `config/pricing.gemini.json` ya están preparados para Gemini. Si se cambia el modelo, verificar su precio. Para OpenAI configurar `AI_PROVIDER=openai`, `OPENAI_API_KEY`, `MODEL_*` y `config/pricing.json` con [precios oficiales](https://developers.openai.com/api/docs/pricing); esa tabla alternativa empieza vacía.
+4. Mantener las flags de efectos externos en `false` para estos demos. Instagram manual tiene su habilitación independiente documentada.
 5. Revisar `cm:context-preview` y luego ejecutar `cm:ai-demo`.
 
 Formato de precios, sin precios inventados en el ejemplo:
@@ -80,7 +90,7 @@ Formato de precios, sin precios inventados en el ejemplo:
 {"version":"FECHA_DE_VERIFICACION","models":{"ID_CONFIGURADO":{"input":"NUMERO_OFICIAL","cachedInput":"NUMERO_OFICIAL","output":"NUMERO_OFICIAL"}}}
 ```
 
-**Reemplazar los marcadores por números de precios oficiales comprobados (sin comillas)**. El ejemplo no es una configuración ejecutable; no usar ceros para simular una tarifa real gratuita. El límite en dólares bloquea antes de llamar si falta precio. No hay selección implícita de modelo ni habilitación automática por mera presencia de una API key.
+**Reemplazar los marcadores por números de precios oficiales comprobados (sin comillas)** al configurar un modelo adicional. El bloque anterior no es una configuración ejecutable; no usar ceros para simular una tarifa real gratuita. El límite en dólares bloquea antes de llamar si falta precio. Gemini tiene modelos predeterminados explícitos; la presencia de una API key no habilita IA ni publicación.
 
 El preview es de sólo lectura y no llama al modelo. Admite `--id`, `--file`, `--skill` y `--show-prompt`. Muestra modelo/perfil, referencias, razón de ejecución, bytes/tokens estimados, reserva conservadora, presupuesto restante y cache hit probable.
 
@@ -94,15 +104,15 @@ Los mocks no contienen píxeles revisables. El dry-run real puede finalizar con 
 | STANDARD | 10 | 240000 | 40000 | 2.00 |
 | PREMIUM | 20 | 480000 | 80000 | 8.00 |
 
-Todo se configura en `config/ai.json`, incluidos límites por llamada/Skill, modelos por perfil, timeout y cantidad de registros de contexto. Los límites amplios de input son **reservas conservadoras en bytes UTF-8**, no tokens consumidos. La estimación de tokens se muestra aparte; uso real y cached tokens provienen de la respuesta API, o quedan `null`.
+La tabla anterior corresponde al perfil base/OpenAI `config/ai.json`. Gemini usa los límites de `config/ai.gemini.json`, con reserva de entrada adicional para el PNG de QA. Los límites amplios de input son **reservas conservadoras en bytes UTF-8**, no tokens consumidos. La estimación de tokens se muestra aparte; uso real y cached tokens provienen de la respuesta API, o quedan `null`.
 
 `blocked_budget` conserva hechos y trabajo válido, invalida aprobación y requiere revisión humana. No se cambia de clase automáticamente ni se omite verificación o QA. Los reintentos gastan del mismo presupuesto. El SDK tiene retries desactivados: el único límite de reintentos está en el runner.
 
 `WorkflowRun` registra modelo/proveedor, tokens, latencia, costos reales o estimados, referencias, clase y workflow. `cm:usage` agrupa por contenido, Skill, workflow, día de Buenos Aires, modelo y clase. Los totales incompletos quedan `null`. Un journal previo `.local/ai-usage.jsonl` conserva reservas ante interrupciones; reservas sin reconciliar no se consideran gratuitas.
 
-## Modo 3 — Producción futura
+## Publicación y scheduler
 
-No habilitado. Publicación sigue siendo `MockPublishingProvider`; fuentes son fixtures y no hay Meta, Metricool, Canva, Adobe, S3 ni scraping real. Las cuatro flags de efectos externos se rechazan si se intentan activar. IA real es una capacidad independiente.
+Instagram manual con Meta y S3 está disponible bajo su flag y comandos explícitos: ver [INSTAGRAM_PUBLISHING.md](docs/INSTAGRAM_PUBLISHING.md). El ciclo nuevo agrega autorización por política y configuración Railway Cron: [AUTOMATION.md](docs/AUTOMATION.md). Los recorridos fixture anteriores conservan `MockPublishingProvider`. IA real conserva su habilitación y presupuesto independientes.
 
 ## PostgreSQL
 

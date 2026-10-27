@@ -36,6 +36,7 @@ export class DeterministicQualityGate {
     c: ContentItem,
     event: SkillOutputs["polo-news-researcher"],
     stage: "post_render" | "pre_publish" = "post_render",
+    policyApproval?: () => boolean,
   ): GateResult {
     const issues: GateIssue[] = [];
     const fail = (
@@ -361,7 +362,7 @@ export class DeterministicQualityGate {
           "opportunity",
           "Same opportunity already produced or scheduled",
         );
-    if (stage === "pre_publish" && !validApproval(c))
+    if (stage === "pre_publish" && !validApproval(c) && !policyApproval?.())
       fail(
         "invalid_approval",
         "human-editor",
@@ -389,7 +390,9 @@ export class DeterministicQualityGate {
         "duplicates",
         "cta_destinations",
         "format",
-        ...(stage === "pre_publish" ? ["human_approval"] : []),
+        ...(stage === "pre_publish"
+          ? [policyApproval ? "policy_approval" : "human_approval"]
+          : []),
       ],
     };
   }

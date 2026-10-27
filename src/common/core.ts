@@ -36,18 +36,39 @@ export function redact(value: unknown): unknown {
     return Object.fromEntries(
       Object.entries(value).map(([k, v]) => [
         k,
-        k === "api_key_configured" && typeof v === "boolean" ? v : /secret|password|api.?key|authorization|database_url|(?:access|refresh|auth|id)[_-]?token|private[_-]?key/i.test(
-          k,
-        ) || /^token$/i.test(k)
-          ? "[REDACTED]"
-          : redact(v),
+        k === "api_key_configured" && typeof v === "boolean"
+          ? v
+          : /secret|password|api.?key|authorization|database_url|(?:access|refresh|auth|id)[_-]?token|private[_-]?key/i.test(
+                k,
+              ) ||
+              /^(?:token|oauthCode|authorizationCode|session|cookie|signedUrl|mediaURL|credential|credentials)$/i.test(
+                k,
+              ) ||
+              /encryption[_-]?key|aws[_-]?session|x-amz-/i.test(k)
+            ? "[REDACTED]"
+            : redact(v),
       ]),
     );
   if (typeof value === "string") {
-    const safe = process.env.OPENAI_API_KEY
-      ? value.replaceAll(process.env.OPENAI_API_KEY, "[REDACTED]")
-      : value;
+    let safe = value;
+    for (const name of [
+      "OPENAI_API_KEY",
+      "GEMINI_API_KEY",
+      "GOOGLE_API_KEY",
+      "INSTAGRAM_CLIENT_SECRET",
+      "INSTAGRAM_ACCESS_TOKEN",
+      "INSTAGRAM_TOKEN_ENCRYPTION_KEY",
+      "AWS_ACCESS_KEY_ID",
+      "AWS_SECRET_ACCESS_KEY",
+      "AWS_SESSION_TOKEN",
+    ])
+      if (process.env[name])
+        safe = safe.replaceAll(process.env[name]!, "[REDACTED]");
     return safe
+      .replace(
+        /https:\/\/[^\s"<>]*[?&](?:X-Amz-Signature|X-Amz-Credential|access_token|client_secret)=[^\s"<>]*/gi,
+        "[REDACTED_CREDENTIAL_URL]",
+      )
       .replace(/Bearer\s+[^\s]+/gi, "Bearer [REDACTED]")
       .replace(/postgres(?:ql)?:\/\/[^\s]+/gi, "[REDACTED_DATABASE_URL]")
       .replace(/\bsk-[A-Za-z0-9_-]{16,}\b/g, "[REDACTED]");

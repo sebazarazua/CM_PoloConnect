@@ -91,6 +91,7 @@ export class CommunityManagerOrchestrator {
     executor: SkillExecutor = new FixtureSkillExecutor(),
     readonly config: Config = loadConfig(),
     ai?: AISettings,
+    readonly taskBrief?: unknown,
   ) {
     ensure(
       providers.publishing.name === "mock",
@@ -147,6 +148,7 @@ export class CommunityManagerOrchestrator {
   private context(s: Store, excludeId?: string): unknown {
     return {
       editorial,
+      ...(this.taskBrief ? { taskBrief: this.taskBrief } : {}),
       ...(editorialSummary(s, this.runner.ai, excludeId) as object),
     };
   }
@@ -211,7 +213,7 @@ export class CommunityManagerOrchestrator {
             eventRevision: event.revision,
             headline: event.data.headline_working,
             facts: event.data.claims,
-            simulated: true,
+            simulated: event.data.simulated === true,
           },
           event.fingerprint,
         ),
@@ -812,7 +814,10 @@ export class CommunityManagerOrchestrator {
           "renderer_editor",
         );
       }
-      const qaInput = previewInput(s, c, "quality-reviewer", this.runner),
+      const qaInput = {
+          ...previewInput(s, c, "quality-reviewer", this.runner),
+          context: this.context(s, c.id),
+        },
         expectedReview = this.runner.preview(
           s,
           "quality-reviewer",
@@ -877,6 +882,7 @@ export class CommunityManagerOrchestrator {
         transition(s, c, "qa_failed", { issues: c.blockers });
         return c;
       }
+      if (c.status === "qa_failed") transition(s, c, "ready_for_qa");
       const result = await this.review(s, c, "post_render");
       if (result.decision !== "pass_for_human_approval")
         return this.qaFailure(s, c, result);

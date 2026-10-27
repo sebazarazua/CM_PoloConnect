@@ -1,17 +1,17 @@
 # Integraciones
 
-Todos los puertos están en `src/providers/contracts.ts`. Los adapters de contenido/publicación incluidos sólo usan memoria, fixtures y referencias locales. El executor IA es una capacidad separada, opt-in. No hay SDK de Meta, request HTTP de publicación, scraping ni conexión a cuentas sociales.
+Los puertos editoriales están en `src/providers/contracts.ts`. La integración manual real de Instagram tiene contratos propios para OAuth, contenedores, hosting y journal en `src/integrations/instagram/`; ver [INSTAGRAM_PUBLISHING.md](INSTAGRAM_PUBLISHING.md). Los comandos fixture conservan sus providers locales. El executor IA es una capacidad separada y opt-in.
 
 | Puerto | Operaciones | Implementación actual | Adapter futuro |
 |---|---|---|---|
-| PublishingProvider | validate, schedule, publish, getStatus, deleteScheduled | MockPublishingProvider con ledger de instancia y payload persistido por el servicio | Meta / Metricool |
+| PublishingProvider / InstagramPublishingContract | mock anterior; OAuth, createContainer, status, publishContainer, reconcile en Instagram | MockPublishingProvider e InstagramPublishingProvider manual con journal persistente | Metricool |
 | AnalyticsProvider | snapshot con ventana y definiciones | MockAnalyticsProvider | Instagram Insights / Metricool |
-| DesignRenderer | render de plan con fuentes | MockDesignRenderer, referencia sin media | Canva / Adobe / Figma / HTML canvas |
+| DesignRenderer | render de plan con fuentes | MockDesignRenderer y LocalDesignRenderer con Chromium/PNG/JPG/QA | Canva / Adobe / Figma |
 | VideoProvider | discoverClips, getMetadata, requestCut, getRender | MockVideoProvider | streaming y pipeline de cortes/renders |
 | AssetRepository | findForEvent, get, save | ReferenceAssetRepository | S3 / Drive / filesystem / Polo Connect |
 | PoloConnectDataProvider | partidos, calendario, torneos, resultados, estadísticas, players, teams, horses, streams, replays | Fixtures explícitos; entidades no disponibles devuelven lista vacía | Backend Polo Connect |
 | PoloSourceProvider | discover de eventos con clave canónica | MockPoloSourceProvider | AAP / PoloLine / PoloHUB / WPT / USPA |
-| SkillExecutor | execute(bundle, structuredInput) | FixtureSkillExecutor / CallbackSkillExecutor / OpenAIResponsesSkillExecutor | Otros modelos autorizados |
+| SkillExecutor | execute(bundle, structuredInput) | FixtureSkillExecutor / CallbackSkillExecutor / GeminiSkillExecutor / OpenAIResponsesSkillExecutor | Otros modelos autorizados |
 
 El ledger `getStatus()` del mock corresponde a la instancia actual. Tras reiniciar, la historia durable se consulta con `cm:inspect`, que usa las publicaciones persistidas. Un proveedor futuro debe implementar recibos/status durables, cancelación confirmada y reconciliación; no debe trasladar el ledger en memoria a producción.
 
@@ -24,14 +24,14 @@ El ledger `getStatus()` del mock corresponde a la instancia actual. Tras reinici
 5. Respetar flags, gates de derechos y aprobación; no llamar APIs desde Skills o tests de fixtures.
 6. Antes de habilitar publicación real, agregar outbox durable, reconciliación del proveedor, autenticación de aprobadores, reglas actuales de plataforma y pruebas en sandbox autorizado.
 
-En esta fase cualquier intento de activar `ENABLE_REAL_PUBLISHING`, `ENABLE_AUTO_APPROVAL`, `ENABLE_AUTO_RENDER` o `ENABLE_EXTERNAL_FETCHING` falla al cargar configuración. No basta con cambiar una flag para producir efectos externos: los transportes reales no existen.
+`ENABLE_REAL_PUBLISHING` acepta habilitación explícita para el CLI manual nuevo. Autoaprobación, rendering externo y fetching automático siguen bloqueados. El flag no cambia los providers de los comandos anteriores ni activa publicaciones por presencia de tokens.
 
 ## Assets y marca
 
 `assets/{raw,approved,rendered,archive}` sólo contiene placeholders para referencias. Cada asset guarda derechos, fuente, crédito, referencia, metadata y, opcionalmente, vencimiento/plataformas permitidas. El gate excluye del payload assets seleccionados sin permiso reutilizable, incluso si fueron marcados opcionales. Los clips y audio del Reel tienen gates adicionales.
 
-`brand/system.json` mantiene logos/colores/tipografía/spacing sin definir y lista lo faltante. No se aprobaron colores o fuentes inventados. Los planes demo declaran que su apariencia y checks son ficticios; no certifican diseño ni accesibilidad de media real. Los futuros renderers deben devolver archivos reales y el QA debe revisarlos antes de solicitar aprobación.
+`brand/system.json` registra los originales aportados, el pack normalizado y la paleta. El renderer Chromium produce PNG/JPG reales con QA determinista y el QA visual real recibe los archivos finales. Los fixtures no certifican revisión IA. Ver [PRODUCTION_FINISH.md](PRODUCTION_FINISH.md).
 
 ## IA real independiente
 
-`ENABLE_REAL_AI` sólo habilita el executor OpenAI Responses en `cm:ai-demo`. No habilita ninguna integración de contenido/publicación. Endpoint oficial, sin herramientas ni navegación, structured outputs, reservas/ledger y límites en `config/ai.json`. Ver [AI_RUNTIME.md](AI_RUNTIME.md).
+`ENABLE_REAL_AI` habilita el executor seleccionado por `AI_PROVIDER`: Gemini predeterminado u OpenAI alternativo. No habilita publicación por sí solo. Endpoints oficiales, sin herramientas ni navegación, JSON estructurado, reservas/ledger y límites independientes por perfil. Ver [AI_RUNTIME.md](AI_RUNTIME.md) y [automatización con Gemini](AUTOMATION.md).

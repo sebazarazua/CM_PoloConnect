@@ -155,6 +155,24 @@ export class SkillRunner {
         reservedCost > remaining.maxCostUsd
       )
         budgetIssue = "maxCostUsd reservation exceeds remaining budget";
+      const scope = this.ai.automationScope;
+      if (scope) {
+        const rows = store.runs.filter(
+          (r) =>
+            r.llmCall && Date.parse(r.startedAt) >= Date.parse(scope.startedAt),
+        );
+        const cost = rows.reduce(
+          (sum, r) => sum + (r.budgetCharge?.costUsd ?? 0),
+          0,
+        );
+        if (rows.length >= scope.maxCalls)
+          budgetIssue = "Automation cycle maxCalls exhausted";
+        else if (
+          reservedCost === null ||
+          cost + reservedCost > scope.maxCostUsd
+        )
+          budgetIssue = "Automation cycle cost reservation exceeds budget";
+      }
     }
     return {
       skill,
@@ -351,7 +369,12 @@ export class SkillRunner {
             maxOutputTokens: plan.maxOutputTokens,
             timeoutMs: this.ai.timeoutMs,
             prepared: plan.prepared,
-            signal: controller.signal,
+            signal: this.ai.automationScope?.signal
+              ? AbortSignal.any([
+                  controller.signal,
+                  this.ai.automationScope.signal,
+                ])
+              : controller.signal,
           }),
           timeout,
         ]);

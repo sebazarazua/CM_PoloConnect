@@ -24,15 +24,15 @@ Si cambia un schema, regenerar con `npm run skills:types`, actualizar fixtures l
 
 ## Límites deliberados
 
-- Executor remoto preparado mediante SDK oficial Responses, opt-in con flag y API key. Ver `AI_RUNTIME.md`. Sin API key, todos los tests usan fixtures/fakes y ningún resultado se presenta como validación contra un modelo real.
-- Sin media real: los mock renderers producen referencias y metadata. No se simula que un archivo fue inspeccionado visualmente.
+- Executors remotos Gemini (default) y OpenAI alternativo, opt-in con flag y API key. Ver `AI_RUNTIME.md`. Todos los tests usan fixtures/fakes y ningún resultado se presenta como validación contra un modelo real.
+- Renderer local Chromium con PNG/JPG reales; los mock renderers anteriores conservan referencias y metadata. Sólo el QA con píxeles y executor real puede autorizar una publicación real.
 - Sin autenticación, servidor público ni UI administrativa; actor local declarado.
 - Un workspace serializado, agregado completo y proyecciones actualizadas por transacción. Antes de gran volumen, dividir agregados y usar workers/outbox.
-- Sin scheduler en background, calendario conectado ni publicación externa.
+- Sin scheduler dentro del proceso ni calendario conectado. Railway Cron invoca tareas cortas; Instagram manual/automático se configura en `AUTOMATION.md`.
 - Deduplicación por claves/IDs/URLs y formato; no hay motor semántico ni garantía de resolver entidades de fuentes reales sin adapters.
 - Re-review completo en esta versión. Se preservan las capacidades delta de la Skill original; la API de orquestación todavía no expone un merge de revisiones delta.
 - Las evaluaciones de performance demo prueban trazabilidad y feedback, no efectividad de contenido ni causalidad.
 
 ## Siguiente incremento
 
-Incorporar identidad visual y permisos de assets; validar el runner Responses con una API key autorizada y precios oficiales configurados; evaluar independencia de QA y límites de triggers con tareas reales; agregar autenticación de aprobadores y una cola/outbox antes de cualquier integración que publique. Activar proveedores reales sólo con alcance, credenciales y pruebas autorizadas.
+Completar la validación A/B con Gemini y credenciales autorizadas, revisar el dry run y después realizar C en Instagram. Identidad visual, permisos por asset, cola simple, recibos y política ya están implementados. Agregar adaptadores de fuentes y formatos antes de ampliar la automatización fuera de resultados confirmados.

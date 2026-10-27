@@ -132,9 +132,17 @@ model Publication {
   publishedAt DateTime?
   externalId String?
   status String
+  accountId String?
+  containerId String?
+  igMediaId String?
+  permalink String?
+  publicationPackageHash String?
+  captionVersion Int?
+  assetVersion Int?
   versions Json
   payload Json
   data Json
+  @@index([provider, accountId, status])
 }
 model PerformanceSnapshot {
   id String @id

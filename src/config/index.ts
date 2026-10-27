@@ -9,10 +9,15 @@ export interface Config {
   mode: "mock";
   maxRetries: number;
   maxReroutes: number;
-  flags: Record<(typeof dangerousFlags)[number], false>;
+  flags: Record<(typeof dangerousFlags)[number], boolean>;
 }
 export function loadConfig(env: NodeJS.ProcessEnv = process.env): Config {
   for (const flag of dangerousFlags) {
+    if (
+      flag === "ENABLE_REAL_PUBLISHING" &&
+      [undefined, "", "false", "true"].includes(env[flag])
+    )
+      continue;
     if (env[flag] !== undefined && env[flag] !== "" && env[flag] !== "false")
       throw new CMError(
         "permanent_error",
@@ -30,7 +35,10 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): Config {
     maxRetries: limit("MAX_SKILL_RETRIES", 2),
     maxReroutes: limit("MAX_REROUTES", 4),
     flags: Object.fromEntries(
-      dangerousFlags.map((k) => [k, false]),
+      dangerousFlags.map((k) => [
+        k,
+        k === "ENABLE_REAL_PUBLISHING" && env[k] === "true",
+      ]),
     ) as Config["flags"],
   };
 }

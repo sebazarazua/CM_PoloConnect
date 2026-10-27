@@ -7,8 +7,7 @@ import { mockProviders, demoEvent } from "../providers/mock/index.js";
 import { runAIDemo } from "../workflows/demo.js";
 import { current, isReelPlan } from "../domain/models.js";
 import { loadConfig } from "../config/index.js";
-import { loadAISettings } from "../ai/config.js";
-import { OpenAIResponsesSkillExecutor } from "../ai/openai-executor.js";
+import { selectedAISettings, selectedExecutor } from "../ai/factory.js";
 import { usageReport } from "../ai/usage.js";
 import { LocalDesignRenderer } from "./provider.js";
 import { families, surfaces, type Family, type Surface } from "./catalog.js";
@@ -209,10 +208,8 @@ export async function renderDemo(
     repository = options.realAI
       ? new FileRepository(resolve(`.local/visual-ai-demo-${mode}.json`))
       : new MemoryRepository();
-  const ai = loadAISettings();
-  const executor = options.realAI
-    ? new OpenAIResponsesSkillExecutor(ai)
-    : undefined;
+  const ai = selectedAISettings();
+  const executor = options.realAI ? selectedExecutor(ai) : undefined;
   const cm = new CommunityManagerOrchestrator(
     repository,
     { ...mockProviders(), design },
@@ -326,7 +323,7 @@ export async function renderDemo(
       photo:
         "explicit abstract placeholder; no authentic sports photo supplied",
       visualReview: options.realAI
-        ? "OpenAI receives final feed, Story and Reel cover PNGs; inspect ledger/blockers"
+        ? "Selected live AI receives final feed, Story and Reel cover PNGs; inspect ledger/blockers"
         : "fixture executor only; visual model review not executed",
       usage: usageReport(state),
       cacheHits: items.filter((i) => i.receipt.cached).length,

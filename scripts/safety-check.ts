@@ -18,6 +18,7 @@ const patterns = [
   /\bsk-[A-Za-z0-9_-]{30,}\b/,
   /\bgh[pousr]_[A-Za-z0-9]{30,}\b/,
   /\bEAA[A-Za-z0-9]{80,}\b/,
+  /\bAIza[A-Za-z0-9_-]{30,}\b/,
 ];
 let scanned = 0;
 function scan(folder: string): void {
@@ -42,7 +43,8 @@ function scan(folder: string): void {
       );
     if (
       path.startsWith(join(root, "src")) &&
-      /\b(?:fetch|axios|https?\.request)\s*\(/.test(text)
+      /\b(?:fetch|axios|https?\.request)\s*\(/.test(text) &&
+      path !== join(root, "src", "integrations", "instagram", "http.ts")
     )
       throw new Error(
         `Unexpected outbound transport in ${relative(root, path)}`,
@@ -60,16 +62,26 @@ for (const flag of dangerousFlags)
     sample.includes(`${flag}=false`),
     `Unsafe example configuration ${flag}`,
   );
+for (const line of [
+  "AI_PROVIDER=gemini",
+  "AUTOMATION_MODE=supervised",
+  "AUTOMATION_DRY_RUN=true",
+  "ENABLE_AUTO_PUBLISH=false",
+])
+  ensure(sample.includes(line), `Unsafe or missing example default: ${line}`);
 ensure(
-  Object.values(loadConfig().flags).every((v) => v === false),
+  Object.values(loadConfig({}).flags).every((v) => v === false),
   "Unsafe feature flags",
 );
 console.log(
   JSON.stringify({
     filesScanned: scanned,
     secretPatterns: "none_detected",
-    outboundTransports: "official OpenAI SDK only; ENABLE_REAL_AI required",
-    dangerousFlags: "all_false",
-    publishing: "mock_only",
+    outboundTransports:
+      "official Gemini/OpenAI SDKs; official Meta HTTPS allowlist; S3 SDK and signed GET checks",
+    dangerousFlags:
+      "example defaults all false; non-Instagram automation flags fail closed",
+    publishing:
+      "supervised/dry-run by default; live Instagram requires real flag plus human CLI/approval or automatic mode/kill switch/current policy authority",
   }),
 );
