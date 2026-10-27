@@ -246,10 +246,18 @@ describe("Instagram Login and transport", () => {
             wrapped
               ? {
                   data: [
-                    { access_token: "short-fixture-value", user_id: "123" },
+                    {
+                      access_token: "short-fixture-value",
+                      user_id: "123",
+                      permissions: connection.permissions.join(","),
+                    },
                   ],
                 }
-              : { access_token: "short-fixture-value", user_id: "123" },
+              : {
+                  access_token: "short-fixture-value",
+                  user_id: "123",
+                  permissions: connection.permissions.join(","),
+                },
           );
         if (url.includes("graph.instagram.com/access_token"))
           return response({

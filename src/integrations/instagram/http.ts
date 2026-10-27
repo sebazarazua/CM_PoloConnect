@@ -31,6 +31,7 @@ export class MetaHTTP {
     method: "GET" | "POST" | "DELETE",
     params: Record<string, string> = {},
     credential?: string,
+    diagnosticSecrets: readonly string[] = [],
   ): Promise<Record<string, unknown>> {
     const target = new URL(url);
     if (
@@ -39,6 +40,14 @@ export class MetaHTTP {
     )
       throw new InstagramError("meta_api_error");
     const values = new URLSearchParams(params);
+    // Business Login documents multipart (-F) for code exchange. Keep Graph
+    // mutations form-urlencoded; let fetch set the multipart boundary itself.
+    const multipart =
+      method === "POST" &&
+      target.hostname === "api.instagram.com" &&
+      target.pathname === "/oauth/access_token";
+    const form = new FormData();
+    if (multipart) for (const [key, value] of values) form.set(key, value);
     if (method === "GET") target.search = values.toString();
     let response: Response;
     try {
@@ -46,11 +55,13 @@ export class MetaHTTP {
         method,
         headers: {
           ...(credential ? { Authorization: `Bearer ${credential}` } : {}),
-          ...(method === "POST"
+          ...(method === "POST" && !multipart
             ? { "Content-Type": "application/x-www-form-urlencoded" }
             : {}),
         },
-        ...(method === "POST" ? { body: values.toString() } : {}),
+        ...(method === "POST"
+          ? { body: multipart ? form : values.toString() }
+          : {}),
       });
     } catch (error) {
       if (error instanceof InstagramError) throw error;
@@ -60,10 +71,28 @@ export class MetaHTTP {
     try {
       data = (await response.json()) as Record<string, unknown>;
     } catch {
-      throw new InstagramError("meta_api_error", response.status >= 500);
+      throw new InstagramError(
+        "meta_api_error",
+        response.status >= 500,
+        undefined,
+        undefined,
+        {
+          http_status: response.status,
+        },
+      );
     }
+    if (!data || typeof data !== "object" || Array.isArray(data))
+      throw new InstagramError("meta_api_error", false, undefined, undefined, {
+        http_status: response.status,
+      });
     if (!response.ok || data.error || data.error_type)
-      throw normalizeMeta(response.status, data);
+      throw normalizeMeta(response.status, data, [
+        ...diagnosticSecrets,
+        params.code ?? "",
+        params.client_secret ?? "",
+        params.access_token ?? "",
+        credential ?? "",
+      ]);
     return data;
   }
 }

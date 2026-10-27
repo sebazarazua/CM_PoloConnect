@@ -1,7 +1,11 @@
 import { ensure } from "../../common/core.js";
 import { InstagramError } from "./errors.js";
 import { MetaHTTP, instagramObject } from "./http.js";
-import { requireVersion, type InstagramConfig } from "./config.js";
+import {
+  instagramScopes,
+  requireVersion,
+  type InstagramConfig,
+} from "./config.js";
 import type { InstagramConnection } from "./vault.js";
 
 export type InstagramSurface = "feed" | "reel" | "carousel" | "story";
@@ -85,18 +89,11 @@ export class InstagramPublishingProvider implements InstagramPublishingContract 
     );
     if (String(me.user_id) !== this.connection.accountId)
       throw new InstagramError("missing_permission");
-    const granted = await this.request(
-      `${numeric(this.connection.accountId)}/permissions`,
-      "GET",
-    );
-    const permissions = (Array.isArray(granted.data) ? granted.data : [])
-      .filter((p: { status?: string }) => p.status === "granted")
-      .map((p: { permission?: string }) => String(p.permission));
-    if (
-      !["instagram_business_basic", "instagram_business_content_publish"].every(
-        (p) => permissions.includes(p),
-      )
-    )
+    // Grants are captured from Business Login's token response in the vault.
+    // /me validates the token remotely; IG professional users do not document
+    // the Facebook User GET /permissions contract.
+    const permissions = this.connection.permissions;
+    if (!instagramScopes.every((p) => permissions.includes(p)))
       throw new InstagramError("missing_permission");
     const accountType = String(
       me.account_type ?? this.connection.accountType,
@@ -230,4 +227,3 @@ export class InstagramPublishingProvider implements InstagramPublishingContract 
     return { id, permalink };
   }
 }
-
